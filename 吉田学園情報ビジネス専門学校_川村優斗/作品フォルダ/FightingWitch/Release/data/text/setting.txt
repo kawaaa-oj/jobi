@@ -1,0 +1,5 @@
+TIME_LIMIT = 60		# 制限時間
+LIFE = 8			# 残りライフ
+ENEMY_INTERVAL = 30	# 敵の出現間隔
+ITEM_INTERVAL = 10	# アイテムの出現確率
+END_SCRIPT
