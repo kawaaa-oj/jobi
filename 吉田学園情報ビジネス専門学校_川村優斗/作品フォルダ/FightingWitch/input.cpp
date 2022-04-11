@@ -36,10 +36,12 @@ CInput::~CInput()
 HRESULT CInput::Init(HINSTANCE hInstance, HWND hWnd)
 {
 	HRESULT hr = S_FALSE;
+
 	if (m_pInput == NULL)
 	{
 		DirectInput8Create(hInstance, DIRECTINPUT_VERSION, IID_IDirectInput8, (void**)&m_pInput, NULL);
 	}
+
 	return hr;
 }
 

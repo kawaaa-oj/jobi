@@ -29,7 +29,6 @@ CPadX::CPadX()
 //=============================================================================
 CPadX::~CPadX()
 {
-
 }
 
 //=============================================================================
@@ -38,6 +37,7 @@ CPadX::~CPadX()
 HRESULT CPadX::Init(HINSTANCE hInstance, HWND hWnd)
 {
 	CInput::Init(hInstance, hWnd);
+
 	return S_OK;
 }
 
@@ -63,6 +63,7 @@ void CPadX::Update(void)
 		__out XINPUT_STATE* pState        // 現在の結果を受け取る
 	);
 
+	// エラーコード(DWORD)
 	DWORD dwResult = XInputGetState(0, &state);
 
 	if (dwResult == ERROR_SUCCESS)
@@ -76,20 +77,14 @@ void CPadX::Update(void)
 	}
 
 	// 左スティックの入力
-	if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-		state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
-		(state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-			state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
+	if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&(state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
 	{
 		state.Gamepad.sThumbLX = 0;
 		state.Gamepad.sThumbLY = 0;
 	}
 
 	// 右スティックの入力
-	if ((state.Gamepad.sThumbRX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-		state.Gamepad.sThumbRX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
-		(state.Gamepad.sThumbRY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-			state.Gamepad.sThumbRY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
+	if ((state.Gamepad.sThumbRX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&(state.Gamepad.sThumbRY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
 	{
 		state.Gamepad.sThumbRX = 0;
 		state.Gamepad.sThumbRY = 0;

@@ -137,55 +137,8 @@ void CPlayer::Update(void)
 
 	if (nTime != 0)
 	{
-		// 下移動
-		if (pInputKeyboard->GetPress(DIK_S) == true || pInputKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_DOWN)) == true)		//下移動
-		{	// 右下
-			if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
-			{
-				m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
-				m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
-			}
-			// 左下
-			else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
-			{
-				m_pos.x += sinf(D3DX_PI * 0.25f) * -20.0f;
-				m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
-			}
-			else
-			{
-				m_pos.y += 15.0f;
-			}
-		}
-
-		// 上移動
-		else if (pInputKeyboard->GetPress(DIK_W) == true || pInputKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_UP)) == true)	//上移動
-		{	// 右上
-			if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
-			{
-				m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
-				m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
-			}
-			// 左上
-			else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
-			{
-				m_pos.x += sinf(D3DX_PI * 0.75f) * -20.0f;
-				m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
-			}
-			else
-			{
-				m_pos.y -= 15.0f;
-			}
-		}
-		// 右移動
-		else if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)	//右移動
-		{
-			m_pos.x += 20.0f;
-		}
-		// 左移動
-		else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)	//左移動
-		{
-			m_pos.x -= 20.0f;
-		}
+		// プレイヤーの移動
+		PlayerMove();
 
 		// 連射状態の処理
 		if (m_state == STATE_RENSYA)
@@ -460,6 +413,65 @@ void CPlayer::Update(void)
 void CPlayer::Draw(void)
 {
 	CScene2D::Draw();
+}
+
+void CPlayer::PlayerMove(void)
+{
+	// キーボード取得
+	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+
+	// ゲームパッドの取得
+	CPadX *pPadX = CManager::GetPadX();
+
+	// 下移動
+	if (pInputKeyboard->GetPress(DIK_S) == true || pInputKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_DOWN)) == true)		//下移動
+	{	// 右下
+		if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
+		{
+			m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
+			m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
+		}
+		// 左下
+		else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
+		{
+			m_pos.x += sinf(D3DX_PI * 0.25f) * -20.0f;
+			m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
+		}
+		else
+		{
+			m_pos.y += 15.0f;
+		}
+	}
+
+	// 上移動
+	else if (pInputKeyboard->GetPress(DIK_W) == true || pInputKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_UP)) == true)	//上移動
+	{	// 右上
+		if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
+		{
+			m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
+			m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
+		}
+		// 左上
+		else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
+		{
+			m_pos.x += sinf(D3DX_PI * 0.75f) * -20.0f;
+			m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
+		}
+		else
+		{
+			m_pos.y -= 15.0f;
+		}
+	}
+	// 右移動
+	else if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)	//右移動
+	{
+		m_pos.x += 20.0f;
+	}
+	// 左移動
+	else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)	//左移動
+	{
+		m_pos.x -= 20.0f;
+	}
 }
 
 //=============================================================================

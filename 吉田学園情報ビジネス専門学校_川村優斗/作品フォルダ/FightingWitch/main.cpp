@@ -88,20 +88,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 		else
 		{
-			dwCurrentTime = timeGetTime();	// 現在の時間を取得
+			// 現在の時間を取得
+			dwCurrentTime = timeGetTime();	
+
+			// 0.5秒ごとに実行
 			if ((dwCurrentTime - dwFPSLastTime) >= 500)
-			{// 0.5秒ごとに実行
+			{
 #ifdef _DEBUG
 			 // FPSを算出
 				g_nCountFPS = dwFrameCount * 1000 / (dwCurrentTime - dwFPSLastTime);
 #endif
-				dwFPSLastTime = dwCurrentTime;	// 現在の時間を保存
+				// 現在の時間を保存
+				dwFPSLastTime = dwCurrentTime;
 				dwFrameCount = 0;
 			}
 
+			// 1/60秒経過
 			if ((dwCurrentTime - dwExecLastTime) >= (1000 / 60))
-			{// 1/60秒経過
-				dwExecLastTime = dwCurrentTime;	// 現在の時間を保存
+			{
+				// 現在の時間を保存
+				dwExecLastTime = dwCurrentTime;	
 
 				// 更新処理
 				pManager->Update();
@@ -149,8 +155,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		switch (wParam)
 		{
-		case VK_ESCAPE:				// [ESC]キーが押された
-			DestroyWindow(hWnd);	// ウィンドウを破棄するよう指示する
+		// [ESC]キーが押された
+		case VK_ESCAPE:
+			// ウィンドウを破棄するよう指示する
+			DestroyWindow(hWnd);	
 			break;
 		}
 		break;

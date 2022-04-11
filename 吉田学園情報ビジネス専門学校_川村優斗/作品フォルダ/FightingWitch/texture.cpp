@@ -60,7 +60,7 @@ HRESULT CTexture::Init(void)
 				fscanf(pFile, "%s", &aFile[0]);
 				fscanf(pFile, "%s", &aFile[0]);
 
-				//テクスチャの読み込み
+				// テクスチャの読み込み
 				D3DXCreateTextureFromFile(pDevice, &aFile[0], &m_pTexture[m_nType]);
 				m_nType++;
 			}

@@ -40,6 +40,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	void PlayerMove(void);
+
 	void ChangeState(PLAYERSTATE state);
 	CPlayer::PLAYERSTATE GetState(void);
 

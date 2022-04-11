@@ -66,6 +66,7 @@ void CBullet::Update(void)
 {
 	// プレイヤーの移動
 	D3DXVECTOR3 pPos = Getposition();
+	m_pos = pPos;
 
 	// 敵の情報の取得
 	CEnemy *pEnemy = CGame::GetEnemy();
@@ -134,64 +135,10 @@ void CBullet::Update(void)
 
 						// 爆発を生成し
 						CExplosion::Create(pos, size, CTexture::TEXTURETYPE_EXPLOSION);
-
-						// スコア加算
-						//pScore->AddScore(10);
-
-						int m_nRand, nRand2;
-
-						// アイテムの出現率
-						int nItemInterval;
 						
-						char aFile[256];
-						FILE *pFile = fopen("data//text//setting.txt", "r");
+						// アイテムを生成し
+						ItemCreate();
 
-						if (pFile != NULL)
-						{
-							while (true)
-							{
-								fscanf(pFile, "%s", &aFile[0]);
-								if (strcmp(&aFile[0], "ITEM_INTERVAL") == 0)
-								{
-									// テクスチャ数
-									fscanf(pFile, "%s", &aFile[0]);
-									fscanf(pFile, "%d", &nItemInterval);
-								}
-								if (strcmp(&aFile[0], "END_SCRIPT") == 0)
-								{
-									// 終了
-									break;
-								}
-							}
-							fclose(pFile);
-						}
-
-						// アイテムを出すか
-						m_nRand = rand() % nItemInterval;
-						
-						if (m_nRand == 0)
-						{
-							// なんのアイテムを出すか
-							nRand2 = rand() % 4;
-							
-							// アイテムを出す
-							if (nRand2 == 0)
-							{
-								CItem::Create(D3DXVECTOR3(pPos.x, pPos.y, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CTexture::TEXTURETYPE_ITEMLIFE);
-							}
-							if (nRand2 == 1)
-							{
-								CItem::Create(D3DXVECTOR3(pPos.x, pPos.y, 0.0f), D3DXVECTOR3(-6.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CTexture::TEXTURETYPE_ITEMMUTEKI);
-							}
-							if (nRand2 == 2)
-							{
-								CItem::Create(D3DXVECTOR3(pPos.x, pPos.y, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 0.0f), D3DXVECTOR2(70.0f, 50.0f), CTexture::TEXTURETYPE_ITEMSCORE);
-							}
-							if (nRand2 == 3)
-							{
-								CItem::Create(D3DXVECTOR3(pPos.x, pPos.y, 0.0f), D3DXVECTOR3(-6.0f, 0.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), CTexture::TEXTURETYPE_ITEMGUN);
-							}
-						}
 						// 消える
 						Uninit();
 						return;
@@ -222,6 +169,67 @@ void CBullet::Update(void)
 void CBullet::Draw(void)
 {
 	CScene2D::Draw();
+}
+
+//=============================================================================
+// アイテムの生成
+//=============================================================================
+void CBullet::ItemCreate(void)
+{
+	int m_nRand, nRand2;
+
+	// アイテムの出現率
+	int nItemInterval;
+
+	char aFile[256];
+	FILE *pFile = fopen("data//text//setting.txt", "r");
+
+	if (pFile != NULL)
+	{
+		while (true)
+		{
+			fscanf(pFile, "%s", &aFile[0]);
+			if (strcmp(&aFile[0], "ITEM_INTERVAL") == 0)
+			{
+				// テクスチャ数
+				fscanf(pFile, "%s", &aFile[0]);
+				fscanf(pFile, "%d", &nItemInterval);
+			}
+			if (strcmp(&aFile[0], "END_SCRIPT") == 0)
+			{
+				// 終了
+				break;
+			}
+		}
+		fclose(pFile);
+	}
+
+	// アイテムを出すか
+	m_nRand = rand() % nItemInterval;
+
+	if (m_nRand == 0)
+	{
+		// なんのアイテムを出すか
+		nRand2 = rand() % 4;
+
+		// アイテムを出す
+		if (nRand2 == 0)
+		{
+			CItem::Create(D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CTexture::TEXTURETYPE_ITEMLIFE);
+		}
+		if (nRand2 == 1)
+		{
+			CItem::Create(D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f), D3DXVECTOR3(-6.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CTexture::TEXTURETYPE_ITEMMUTEKI);
+		}
+		if (nRand2 == 2)
+		{
+			CItem::Create(D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f), D3DXVECTOR3(-3.0f, 0.0f, 0.0f), D3DXVECTOR2(70.0f, 50.0f), CTexture::TEXTURETYPE_ITEMSCORE);
+		}
+		if (nRand2 == 3)
+		{
+			CItem::Create(D3DXVECTOR3(m_pos.x, m_pos.y, 0.0f), D3DXVECTOR3(-6.0f, 0.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), CTexture::TEXTURETYPE_ITEMGUN);
+		}
+	}
 }
 
 //=============================================================================

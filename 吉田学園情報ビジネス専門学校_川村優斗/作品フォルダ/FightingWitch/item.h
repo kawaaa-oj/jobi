@@ -27,6 +27,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	void ItemGet(void);
+
 	// ÉAÉCÉeÉÄÇÃê∂ê¨
 	static CItem	*Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, CTexture::TEXTURE_TYPE type);
 
