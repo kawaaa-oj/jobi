@@ -35,6 +35,7 @@
 //*****************************************************************************
 #define SCREEN_WIDTH (1280)
 #define SCREEN_HEIGHT (720)
+#define START_KEY (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true|| (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_START)) == true)
 
 //*****************************************************************************
 // ‘O•ûéŒ¾

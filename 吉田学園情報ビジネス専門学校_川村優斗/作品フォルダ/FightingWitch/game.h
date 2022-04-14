@@ -42,6 +42,8 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	void LoadFile(void);
+
 	static CGame *Create(void);
 
 	static CBg				*GetBg(void);
@@ -71,6 +73,9 @@ private:
 	static CEnemyBullet		*m_pEnemyBullet;
 	int						m_nCnt;
 	float					m_fPos2;
+	int						m_nLife;
+	int						m_nTime;
+	int						m_nInterval;
 
 };
 

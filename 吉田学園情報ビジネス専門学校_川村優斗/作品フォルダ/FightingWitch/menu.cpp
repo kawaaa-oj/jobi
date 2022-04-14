@@ -179,7 +179,7 @@ void CMenu::Update(void)
 	}
 
 	// Œˆ’è
-	if (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true)
+	if (START_KEY)
 	{
 		switch (m_nCntSelect)
 		{

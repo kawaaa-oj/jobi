@@ -46,6 +46,7 @@ public:
 
 	ENEMYTYPE GetEnemyType(void);
 	void LifeDamage(void);
+	void EnemyMove(void);
 
 	// ìGÇÃê∂ê¨
 	static CEnemy *Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, ENEMYTYPE type, CTexture::TEXTURE_TYPE ntype);

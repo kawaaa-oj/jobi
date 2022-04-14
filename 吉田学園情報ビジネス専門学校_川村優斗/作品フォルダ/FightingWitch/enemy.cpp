@@ -16,7 +16,6 @@
 #include"game.h"
 #include"time.h"
 #include"life.h"
-#include"padx.h"
 #include"enemybullet.h"
 #include"explosion.h"
 #include <stdlib.h>
@@ -69,13 +68,6 @@ HRESULT CEnemy::Init(void)
 //=============================================================================
 void CEnemy::Uninit(void)
 {
-	// スコアの情報の取得
-	CScore *pScore = CGame::GetScore();
-
-	// 現在の時間を取得
-	CTime *pTime = CGame::GetTime();
-	int nTime = pTime->GetTime();
-
 	// 端っこで消えたか弾が当たって消えたか
 	switch (m_bDeadFlag)
 	{
@@ -86,6 +78,9 @@ void CEnemy::Uninit(void)
 		// プレイヤーの移動と座標の代入
 		D3DXVECTOR3 pPos = Getposition();
 
+		// スコアの情報の取得
+		CScore *pScore = CGame::GetScore();
+
 		// 一部の敵はスコア高めに
 		if (m_type == ENEMY_PLANE)
 		{
@@ -93,6 +88,9 @@ void CEnemy::Uninit(void)
 		}
 		else
 		{
+			// 現在の時間を取得
+			CTime *pTime = CGame::GetTime();
+			int nTime = pTime->GetTime();
 			// タイムアップ時の敵の終了処理でスコアが入らないように
 			if (nTime != 0)
 			{
@@ -121,97 +119,22 @@ void CEnemy::Update(void)
 {
 	// プレイヤーの移動と座標の代入
 	D3DXVECTOR3 pPos = Getposition();
-	m_pos = Getposition();
+	m_pos = pPos;
 	D3DXVECTOR2 pSize = GetSize();
 
 	// 現在の時間を取得
 	CTime *pTime = CGame::GetTime();
 	int nTime = pTime->GetTime();
 
-	// ゲームパッドの取得
-	CPadX *pPadX = CManager::GetPadX();
-
 	// プレイヤーの状態を取得
 	CPlayer *pPlayer = CGame::GetPlayer();
 
 	if (nTime != 0)
 	{
-		//移動量を設定
-		pPos.x -= m_move.x;
-
-		if (m_type == ENEMY_JIGZAG)
-		{
-			if (pPos.y < 0)
-			{
-				m_bFlag = true;
-			}
-			else if (pPos.y > SCREEN_HEIGHT)
-			{
-				m_bFlag = false;
-			}
-			// 上移動
-			if (m_bFlag == false)
-			{
-				pPos.y -= 7.0f;
-			}
-			// 下移動
-			else
-			{
-				pPos.y += 7.0f;
-			}
-		}
-		if (m_type == ENEMY_HOMING)
-		{
-			// プレイヤーの位置を取得
-			m_PlayerPos = pPlayer->GetPos();
-
-			// 上移動
-			if (pPos.y > m_PlayerPos.y)
-			{
-				pPos.y -= 7.0f;
-			}
-			// 下移動
-			else if (pPos.y < m_PlayerPos.y)
-			{
-				pPos.y += 7.0f;
-			}
-			else if (pPos.y == m_PlayerPos.y)
-			{
-
-			}
-		}
-		if (m_type == ENEMY_NORMAL)
-		{
-			m_nCounterAnim++;
-			if (m_nCounterAnim > 18)
-			{
-				m_nCounterAnim = 0;
-
-				m_nPatternAnim++;
-
-				CScene2D::SetVtxTex(m_nPatternAnim, 0.5f, 0.5f, 1.0f);
-			}
-		}
+		EnemyMove();
 	}
 
 	CScene2D::Update();
-
-	// 敵の位置設定
-	SetPosition(pPos);
-
-	// 敵弾の発射
-	if (nTime != 0)
-	{
-		if (m_type == ENEMY_SUPER || m_type == ENEMY_PLANE)
-		{
-			m_BulletCount++;
-			if (m_BulletCount == 50)
-			{
-				CEnemyBullet::Create(D3DXVECTOR3(pPos.x, pPos.y - 5.0f, 0.0f), D3DXVECTOR3(-15.0f, 0.0f, 0.0f), D3DXVECTOR2(10.0f, 10.0f), 60, CTexture::TEXTURETYPE_ENEMYBULLET);
-				m_BulletCount = 0;
-			}
-		}
-	}
 
 	for (int nCntPriority = 0; nCntPriority < 10; nCntPriority++)
 	{
@@ -318,4 +241,81 @@ CEnemy::ENEMYTYPE CEnemy::GetEnemyType(void)
 void CEnemy::LifeDamage(void)
 {
 	m_nLife--;
+}
+
+void CEnemy::EnemyMove(void)
+{
+	// プレイヤーの状態を取得
+	CPlayer *pPlayer = CGame::GetPlayer();
+
+	// プレイヤーの位置を取得
+	m_PlayerPos = pPlayer->GetPos();
+
+	//移動量を設定
+	m_pos.x -= m_move.x;
+
+	if (m_type == ENEMY_JIGZAG)
+	{
+		if (m_pos.y < 0)
+		{
+			m_bFlag = true;
+		}
+		else if (m_pos.y > SCREEN_HEIGHT)
+		{
+			m_bFlag = false;
+		}
+		// 上移動
+		if (m_bFlag == false)
+		{
+			m_pos.y -= 7.0f;
+		}
+		// 下移動
+		else
+		{
+			m_pos.y += 7.0f;
+		}
+	}
+	if (m_type == ENEMY_HOMING)
+	{
+		// 上移動
+		if (m_pos.y > m_PlayerPos.y)
+		{
+			m_pos.y -= 7.0f;
+		}
+		// 下移動
+		else if (m_pos.y < m_PlayerPos.y)
+		{
+			m_pos.y += 7.0f;
+		}
+		else if (m_pos.y == m_PlayerPos.y)
+		{
+
+		}
+	}
+	if (m_type == ENEMY_NORMAL)
+	{
+		m_nCounterAnim++;
+		if (m_nCounterAnim > 18)
+		{
+			m_nCounterAnim = 0;
+
+			m_nPatternAnim++;
+
+			CScene2D::SetVtxTex(m_nPatternAnim, 0.5f, 0.5f, 1.0f);
+		}
+	}
+
+	// 敵の位置設定
+	SetPosition(m_pos);
+
+	// 敵弾の発射
+	if (m_type == ENEMY_SUPER || m_type == ENEMY_PLANE)
+	{
+		m_BulletCount++;
+		if (m_BulletCount == 50)
+		{
+			CEnemyBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 5.0f, 0.0f), D3DXVECTOR3(-15.0f, 0.0f, 0.0f), D3DXVECTOR2(10.0f, 10.0f), 60, CTexture::TEXTURETYPE_ENEMYBULLET);
+			m_BulletCount = 0;
+		}
+	}
 }

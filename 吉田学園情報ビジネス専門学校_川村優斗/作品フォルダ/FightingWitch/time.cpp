@@ -88,7 +88,6 @@ void CTime::Update(void)
 
 	if (m_nTime <= 30)
 	{
-
 		m_col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
 		m_apNumber[0]->SetColor(m_col);
 		m_apNumber[1]->SetColor(m_col);

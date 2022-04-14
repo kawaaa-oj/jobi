@@ -103,7 +103,7 @@ void CUI::Update(void)
 			m_col.a = 0.0f;
 		}
 		m_col.a += 0.01f;
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true)
+		if (START_KEY)
 		{
 			if (m_bDisplay2 == false)
 			{
@@ -128,7 +128,7 @@ void CUI::Update(void)
 		{
 			//^‚ñ’†‚ÅŽ~‚Ü‚é
 			pPos.y -= MOVE_PUSH;
-			if (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true)
+			if (START_KEY)
 			{
 				if (m_fade == false)
 				{

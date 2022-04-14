@@ -91,7 +91,7 @@ void CResult::Update(void)
 	// ゲームパッドの取得
 	CPadX *pPadX = CManager::GetPadX();
 
-	if (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true)
+	if (START_KEY)
 	{
 		if (m_fade == false)
 		{

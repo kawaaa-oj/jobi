@@ -181,7 +181,6 @@ void CHelp::Update(void)
 		}
 	}
 
-
 	// プレイヤーの位置設定
 	SetPosition(pPos);
 

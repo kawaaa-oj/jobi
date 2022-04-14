@@ -75,35 +75,8 @@ HRESULT CGame::Init(void)
 	// 数字のテクスチャロード
 	CNumber::Load();
 
-	int nTime,nLife;
-	char aFile[256];
-	FILE *pFile = fopen("data//text//setting.txt", "r");
-
-	if (pFile != NULL)
-	{
-		while (true)
-		{
-			fscanf(pFile, "%s", &aFile[0]);
-			if (strcmp(&aFile[0], "TIME_LIMIT") == 0)
-			{
-				// テクスチャ数
-				fscanf(pFile, "%s", &aFile[0]);
-				fscanf(pFile, "%d", &nTime);
-			}
-			if (strcmp(&aFile[0], "LIFE") == 0)
-			{
-				// テクスチャ数
-				fscanf(pFile, "%s", &aFile[0]);
-				fscanf(pFile, "%d", &nLife);
-			}
-			if (strcmp(&aFile[0], "END_SCRIPT") == 0)
-			{
-				// 終了
-				break;
-			}
-		}
-		fclose(pFile);
-	}
+	// 設定の読み込み
+	LoadFile();
 
 	// 背景の生成
 	CBg::Create(D3DXVECTOR3(SCREEN_CENTER_X, SCREEN_CENTER_Y + 100.0f, 0.0f), D3DXVECTOR2(SCREEN_WIDTH / 1.5f, SCREEN_HEIGHT / 1.5f), CBg::BGTYPE_GAME1, CTexture::TEXTURETYPE_BGGAME1);
@@ -120,10 +93,10 @@ HRESULT CGame::Init(void)
 	m_pScore = CScore::Create(D3DXVECTOR3(SCREEN_CENTER_X + 330.0f, 650.0f, 0.0f), D3DXVECTOR2(25.0f, 47.0f));
 
 	// ライフの生成
-	m_pLife = CLife::Create(D3DXVECTOR3(SCREEN_CENTER_X + 300.0f, 240.0f, 0.0f), D3DXVECTOR2(20.0f, 20.0f), nLife);
+	m_pLife = CLife::Create(D3DXVECTOR3(SCREEN_CENTER_X + 300.0f, 240.0f, 0.0f), D3DXVECTOR2(20.0f, 20.0f), m_nLife);
 
 	// タイムの生成
-	m_pTime = CTime::Create(D3DXVECTOR3(SCREEN_CENTER_X + 380.0f, 90.0f, 0.0f), D3DXVECTOR2(25.0f, 47.0f), nTime);
+	m_pTime = CTime::Create(D3DXVECTOR3(SCREEN_CENTER_X + 380.0f, 90.0f, 0.0f), D3DXVECTOR2(25.0f, 47.0f), m_nTime);
 
 	return S_OK;
 }
@@ -159,38 +132,12 @@ void CGame::Update(void)
 	CTime *pTime = CGame::GetTime();
 	int nTime = pTime->GetTime();
 
-	// アイテムの出現率
-	int nInterval;
-
-	// ファイル経由で出現率を読み込む
-	char aFile[256];
-	FILE *pFile = fopen("data//text//setting.txt", "r");
-
-	if (pFile != NULL)
-	{
-		while (true)
-		{
-			fscanf(pFile, "%s", &aFile[0]);
-			if (strcmp(&aFile[0], "ENEMY_INTERVAL") == 0)
-			{
-				// アイテムの出現率
-				fscanf(pFile, "%s", &aFile[0]);
-				fscanf(pFile, "%d", &nInterval);
-			}
-			if (strcmp(&aFile[0], "END_SCRIPT") == 0)
-			{
-				// 終了
-				break;
-			}
-		}
-		fclose(pFile);
-	}
 	if (nTime != 0)
 	{
 		m_nCnt++;
-		if (nInterval != 0)
+		if (m_nInterval != 0)
 		{
-			while (m_nCnt >= nInterval)
+			while (m_nCnt >= m_nInterval)
 			{
 				float nPos = 0.0f;
 				float nPos3 = 0.0f;
@@ -283,6 +230,45 @@ void CGame::Update(void)
 //=============================================================================
 void CGame::Draw(void)
 {
+}
+
+void CGame::LoadFile(void)
+{
+	int nTime, nLife;
+	char aFile[256];
+	FILE *pFile = fopen("data//text//setting.txt", "r");
+
+	if (pFile != NULL)
+	{
+		while (true)
+		{
+			fscanf(pFile, "%s", &aFile[0]);
+			if (strcmp(&aFile[0], "TIME_LIMIT") == 0)
+			{
+				// テクスチャ数
+				fscanf(pFile, "%s", &aFile[0]);
+				fscanf(pFile, "%d", &m_nTime);
+			}
+			if (strcmp(&aFile[0], "LIFE") == 0)
+			{
+				// テクスチャ数
+				fscanf(pFile, "%s", &aFile[0]);
+				fscanf(pFile, "%d", &m_nLife);
+			}
+			if (strcmp(&aFile[0], "ENEMY_INTERVAL") == 0)
+			{
+				// アイテムの出現率
+				fscanf(pFile, "%s", &aFile[0]);
+				fscanf(pFile, "%d", &m_nInterval);
+			}
+			if (strcmp(&aFile[0], "END_SCRIPT") == 0)
+			{
+				// 終了
+				break;
+			}
+		}
+		fclose(pFile);
+	}
 }
 
 //=============================================================================
