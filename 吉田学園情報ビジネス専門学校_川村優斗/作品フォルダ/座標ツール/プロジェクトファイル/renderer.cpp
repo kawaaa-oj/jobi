@@ -241,11 +241,11 @@ void CRenderer::DrawFPS(void)
 	if ((x <= 380 + w) && (y <= 200 + h))
 	{
 		// テキスト描画
-		m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0xff, 0xbf, 0xbf, 0));
+		m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0x00, 0xbf, 0xbf, 0));
 	}
 	else
 	{
 		// テキスト描画
-		m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xbf, 0xbf, 0));
+		m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0x00, 0xbf, 0xbf, 0));
 	}
 }
