@@ -56,7 +56,7 @@ public:
 	//ポリゴンの生成
 	static CScene2D *Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size);
 
-	D3DXVECTOR3 Getposition(void);
+	D3DXVECTOR3 GetPosition(void);
 	D3DXVECTOR2 GetSize(void);
 
 	void SetPosition(D3DXVECTOR3 pos);
@@ -74,8 +74,8 @@ private:
 	D3DXVECTOR3				m_move;		// ポリゴンの位置
 	D3DXCOLOR				m_col;		// 色
 	D3DXVECTOR2				m_size;		// サイズ
-	float					m_FTexU;	// テクスチャ座標
-	float					m_FTexV;	// テクスチャ座標
+	float					m_FTexU;	// テクスチャ座標(U)
+	float					m_FTexV;	// テクスチャ座標(V)
 
 };
 

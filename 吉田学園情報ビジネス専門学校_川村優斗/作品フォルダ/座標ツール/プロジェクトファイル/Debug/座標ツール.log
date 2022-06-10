@@ -1,25 +1,9 @@
-﻿  renderer.cpp
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(203): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(204): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(205): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(206): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(207): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(221): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(222): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(223): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(224): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-c:\users\student\documents\visual studio 2015\projects\座標ツール\renderer.cpp(225): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-  polygon.cpp
-  padx.cpp
-  manager.cpp
-  main.cpp
+﻿  polygon.cpp
   コードを生成中...
   コンパイル中...
   texture.cpp
-  scene2d.cpp
-  scene.cpp
-  keyboard.cpp
-  input.cpp
+  manager.cpp
+  bg.cpp
   コードを生成中...
   座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Debug\座標ツール.exe
   座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Debug\座標ツール.pdb (Full PDB)

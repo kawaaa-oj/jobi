@@ -18,7 +18,7 @@
 // マクロ定義
 //*****************************************************************************
 #define NUM_KEY_MAX (256)// キーの最大数
-#define START_KEY (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true|| (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_START)) == true)
+#define START_KEY (pKeyboard->GetTrigger(DIK_SPACE) == true || pKeyboard->GetTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true|| (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_START)) == true)
 // 決定キー
 
 //*****************************************************************************

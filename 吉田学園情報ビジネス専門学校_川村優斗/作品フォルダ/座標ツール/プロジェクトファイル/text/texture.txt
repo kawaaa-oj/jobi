@@ -1,3 +1,0 @@
-TEXTURE_FILENAME = picture//texture.png	# テクスチャ			0
-
-END_SCRIPT

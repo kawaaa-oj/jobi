@@ -16,7 +16,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define FILENAME_TEX "text//texture.txt"
+#define FILENAME_TEX "data//text//texture.txt"
 
 //*****************************************************************************
 // テクスチャのクラス
@@ -27,7 +27,8 @@ public:
 
 	typedef enum
 	{
-		TEXTURETYPE_NORMAL = 0,	// PUSH START
+		TEXTURETYPE_NORMAL = 0,	// ポリゴン
+		TEXTURETYPE_BG,			// 背景
 		TEXTURETYPE_MAX
 	} TEXTURE_TYPE;
 	// テクスチャのタイプ
@@ -40,8 +41,11 @@ public:
 	void Update(void);				// 更新処理
 	void Draw(void);				// 描画処理
 
-	static CTexture *Create(void);		// 生成処理
-	LPDIRECT3DTEXTURE9 SetTextureType(int nType);				// テクスチャの種類を設定
+	// 生成処理
+	static CTexture *Create(void);
+
+	// テクスチャの種類を設定
+	LPDIRECT3DTEXTURE9 SetTextureType(int nType);
 
 private:
 	static LPDIRECT3DTEXTURE9	m_pTexture[TEXTURETYPE_MAX];// テクスチャのポインタ

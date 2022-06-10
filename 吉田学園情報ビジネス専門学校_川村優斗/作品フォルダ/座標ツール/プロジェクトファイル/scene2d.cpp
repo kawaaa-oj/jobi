@@ -157,7 +157,7 @@ void CScene2D::SetPosition(D3DXVECTOR3 pos)
 //=============================================================================
 // 座標の取得
 //=============================================================================
-D3DXVECTOR3 CScene2D::Getposition(void)
+D3DXVECTOR3 CScene2D::GetPosition(void)
 {
 	return m_pos;
 }
@@ -170,6 +170,9 @@ void CScene2D::BindTexture(LPDIRECT3DTEXTURE9 pTexture)
 	m_pTexture = pTexture;
 }
 
+//=============================================================================
+// テクスチャの削除
+//=============================================================================
 void CScene2D::DeleteTexture()
 {
 	m_pTexture = NULL;
@@ -198,10 +201,10 @@ void CScene2D::SetColor(D3DXCOLOR col)
 {
 	m_col = col;
 
-	//頂点情報へのポインタ
+	// 頂点情報へのポインタ
 	VERTEX_2D * pVtx;
 
-	//頂点バッファをロックし、頂点データへのポインタを取得
+	// 頂点バッファをロックし、頂点データへのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void **)&pVtx, 0);
 
 	pVtx[0].col = m_col;
@@ -209,7 +212,7 @@ void CScene2D::SetColor(D3DXCOLOR col)
 	pVtx[2].col = m_col;
 	pVtx[3].col = m_col;
 
-	//頂点バッファをアンロックする
+	// 頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 }
 
@@ -218,7 +221,6 @@ void CScene2D::SetColor(D3DXCOLOR col)
 //=============================================================================
 void CScene2D::SetVtxTex(int PtnAnim, float fAnimU, float TexU, float TexV)
 {
-
 	m_FTexU = TexU;
 	m_FTexV = TexV;
 

@@ -12,6 +12,7 @@
 #include"scene.h"
 #include"polygon.h"
 #include"padx.h"
+#include"keyboard.h"
 
 //=============================================================================
 // コンストラクタ
@@ -21,6 +22,8 @@ CRenderer::CRenderer()
 	m_pD3D = NULL;
 	m_pD3DDevice = NULL;
 	m_nFont = NULL;
+	m_bColorFlag = false;
+	m_bDeleteFlag = false;
 }
 
 //=============================================================================
@@ -108,7 +111,7 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	m_pD3DDevice->SetTextureStageState(0, D3DTSS_COLORARG2, D3DTA_DIFFUSE);
 
 	// デバッグ情報表示用フォントの生成
-	D3DXCreateFont(m_pD3DDevice, 25, 10, 0, 0, FALSE, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, "Terminal", &m_nFont);
+	D3DXCreateFont(m_pD3DDevice, 22, 10, 0, 0, FALSE, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, "Terminal", &m_nFont);
 
 	return S_OK;
 }
@@ -194,7 +197,7 @@ void CRenderer::AddSynthesis(bool bUse)
 void CRenderer::DrawFPS(void)
 {
 	RECT rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-	char str[256];
+	char str[300];
 
 	// FPSを取得
 	m_nCntFPS = GetFPS();
@@ -209,11 +212,14 @@ void CRenderer::DrawFPS(void)
 	// ポリゴンの取得
 	CPolygon *pPolygon = CManager::GetPolygon();
 
+	// キーボード取得
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
+
 	// ゲームパッド取得
 	CPadX *pPadX = CManager::GetPadX();
+
 	if (pPolygon != NULL)
 	{
-
 		D3DXVECTOR3 pos = pPolygon->GetPos();
 		D3DXVECTOR2 size = pPolygon->GetSize();
 
@@ -230,22 +236,105 @@ void CRenderer::DrawFPS(void)
 		// デバッグ表示(パッド接続時とそれ以外で表示を分ける)
 		if (bConnect == false)
 		{
-			wsprintf(str, "FPS:%d\nポリゴンの位置 X:%d,Y:%d,Z:%d\nポリゴンの大きさ 幅:%d,高さ:%d\n[↑↓←→]:移動 [A,D]:幅 [W,S]:高さ\n[Shift]キーを押しながら:微調整\n[X]:大きさ位置リセット\n[P]:txtファイルに保存\n[Enter]:テクスチャ反映/解除", m_nCntFPS, x, y, z, w, h);
+			wsprintf(str, "FPS:%d\nポリゴンの位置 X:%d,Y:%d,Z:%d\nポリゴンの大きさ 幅:%d,高さ:%d\n[↑↓←→]:移動 [A,D]:幅 [W,S]:高さ\n[Shift]キーを押しながら:微調整\n[P]:txtファイルに保存\n[Enter]:テクスチャON/OFF [Space]:背景ON/OFF\n[X]:大きさ位置リセット\n[左Ctrl]:文字を消す\n[右Ctrl]:文字の色を変える", m_nCntFPS, x, y, z, w, h);
 		}
 		else
 		{
-			wsprintf(str, "FPS:%d\nポリゴンの位置 X:%d,Y:%d,Z:%d\nポリゴンの大きさ 幅:%d,高さ:%d\n[左スティック]:移動 [右スティック]:幅、高さ\n[RB]を押しながら:微調整\n[Y]:大きさ位置リセット\n[A]:txtファイルに保存\n[B]:テクスチャ反映/解除", m_nCntFPS, x, y, z, w, h);
+			wsprintf(str, "FPS:%d\nポリゴンの位置 X:%d,Y:%d,Z:%d\nポリゴンの大きさ 幅:%d,高さ:%d\n[左スティック]:移動 [右スティック]:幅、高さ\n[RB]を押しながら:微調整\n[A]:txtファイルに保存\n[B]:テクスチャON/OFF [X]:背景ON/OFF\n[Y]:大きさ位置リセット\n[Back]:文字を消す\n[Start]:文字の色を変える", m_nCntFPS, x, y, z, w, h);
 		}
 	}
+
+	// 色を変える
+	if (pKeyboard->GetTrigger(DIK_RCONTROL) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_START) == true)
+	{
+		switch (m_bColorFlag)
+		{
+		case false:
+			m_bColorFlag = true;
+			break;
+		case true:
+			m_bColorFlag = false;
+			break;
+		}
+	}
+
+	// 文字のオンオフ
+	if (pKeyboard->GetTrigger(DIK_LCONTROL) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_BACK) == true)
+	{
+		switch (m_bDeleteFlag)
+		{
+		case false:
+			m_bDeleteFlag = true;
+			break;
+		case true:
+			m_bDeleteFlag = false;
+			break;
+		}
+	}
+
 	// 左上に来ると邪魔なのでテキストを移動
 	if ((x <= 380 + w) && (y <= 200 + h))
 	{
-		// テキスト描画
-		m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0x00, 0xbf, 0xbf, 0));
+		switch (m_bColorFlag)
+		{
+		case false:
+			switch (m_bDeleteFlag)
+			{
+			case false:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0xff, 0xbf, 0xbf, 0));
+				break;
+			case true:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0, 0, 0, 0));
+				break;
+			}
+			break;
+		case true:
+			switch (m_bDeleteFlag)
+			{
+			case false:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0xff, 0, 0, 0xff));
+				break;
+			case true:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_RIGHT, D3DCOLOR_ARGB(0, 0, 0, 0));
+				break;
+			}
+			break;
+		}
 	}
 	else
 	{
-		// テキスト描画
-		m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0x00, 0xbf, 0xbf, 0));
+		switch (m_bColorFlag)
+		{
+		case false:
+			switch (m_bDeleteFlag)
+			{
+			case false:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0xbf, 0xbf, 0));
+				break;
+			case true:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0, 0, 0, 0));
+				break;
+			}
+			break;
+		case true:
+			switch (m_bDeleteFlag)
+			{
+			case false:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0xff, 0, 0, 0xff));
+				break;
+			case true:
+				// テキスト描画
+				m_nFont->DrawText(NULL, str, -1, &rect, DT_LEFT, D3DCOLOR_ARGB(0, 0, 0, 0));
+				break;
+			}
+			break;
+		}
 	}
 }

@@ -26,8 +26,6 @@ CScene::CScene(int nPriority)
 		if (m_apScene[nPriority][nCntScene] == NULL)
 		{
 			m_apScene[nPriority][nCntScene] = this;
-			//自分の番号を設定
-			m_objType = OBJTYPE_NONE;
 			m_nID = nCntScene;
 			m_nNumAll++;
 			break;
@@ -95,22 +93,6 @@ void CScene::DrawAll(void)
 			}
 		}
 	}
-}
-
-//=============================================================================
-// オブジェクトの種類の設定
-//=============================================================================
-void CScene::SetObjType(OBJTYPE objType)
-{
-	m_objType = objType;
-}
-
-//=============================================================================
-// オブジェクトの種類の取得
-//=============================================================================
-CScene::OBJTYPE CScene::GetObjType(void)
-{
-	return m_objType;
 }
 
 //=============================================================================
