@@ -1,0 +1,4 @@
+TEXTURE_FILENAME = data//picture//texture.png	# テクスチャ	0
+TEXTURE_FILENAME = data//picture//bg.jpg		# 背景			1
+
+END_SCRIPT

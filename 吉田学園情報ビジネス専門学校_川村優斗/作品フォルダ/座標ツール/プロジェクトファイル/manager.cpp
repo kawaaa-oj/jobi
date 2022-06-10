@@ -14,12 +14,13 @@
 #include"manager.h"
 #include"polygon.h"
 #include "texture.h"
+#include"bg.h"
 
 //*****************************************************************************
 // 静的メンバ変数
 //*****************************************************************************
 CRenderer *CManager::m_pRenderer = NULL;
-CInputKeyboard *CManager::m_pInputKeyboard = NULL;
+CKeyboard *CManager::m_pKeyboard = NULL;
 CPadX *CManager::m_pPadX = NULL;
 CPolygon *CManager::m_pPolygon = NULL;
 CTexture *CManager::m_pTexture = NULL;
@@ -51,10 +52,10 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	}
 
 	// キーボードの生成
-	m_pInputKeyboard = new CInputKeyboard;
-	if (m_pInputKeyboard != NULL)
+	m_pKeyboard = new CKeyboard;
+	if (m_pKeyboard != NULL)
 	{
-		m_pInputKeyboard->Init(hInstance, hWnd);
+		m_pKeyboard->Init(hInstance, hWnd);
 	}
 
 	// ゲームパッドの生成
@@ -74,6 +75,8 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 		}
 	}
 
+	CBg::Create(D3DXVECTOR3(SCREEN_CENTER_X, SCREEN_CENTER_Y, 0.0f), D3DXVECTOR2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), CTexture::TEXTURETYPE_BG);
+
 	// ポリゴンの生成
 	m_pPolygon = CPolygon::Create(D3DXVECTOR3(SCREEN_CENTER_X, SCREEN_CENTER_Y, 0.0f), D3DXVECTOR2(40.0f, 40.0f));
 
@@ -86,11 +89,11 @@ HRESULT CManager::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 void CManager::Uninit(void)
 {
 	// キーボードの破棄
-	if (m_pInputKeyboard != NULL)
+	if (m_pKeyboard != NULL)
 	{
-		m_pInputKeyboard->Uninit();
-		delete m_pInputKeyboard;
-		m_pInputKeyboard = NULL;
+		m_pKeyboard->Uninit();
+		delete m_pKeyboard;
+		m_pKeyboard = NULL;
 	}
 
 	// ゲームパッドの破棄
@@ -127,9 +130,9 @@ void CManager::Uninit(void)
 void CManager::Update(void)
 {
 	// キーボードの更新処理(※最初に行う)
-	if (m_pInputKeyboard != NULL)
+	if (m_pKeyboard != NULL)
 	{
-		m_pInputKeyboard->Update();
+		m_pKeyboard->Update();
 	}
 
 	// ゲームパッドの更新処理
@@ -169,9 +172,9 @@ CRenderer * CManager::GetRenderer(void)
 //=============================================================================
 // キーボード入力の取得
 //=============================================================================
-CInputKeyboard * CManager::GetInputKeyboard(void)
+CKeyboard * CManager::GetKeyboard(void)
 {
-	return m_pInputKeyboard;
+	return m_pKeyboard;
 }
 
 //=============================================================================

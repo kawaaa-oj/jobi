@@ -38,6 +38,8 @@ private:
 	LPD3DXFONT				m_nFont = NULL;	// フォントへのポインタ
 	int						m_nCntFPS;		// FPSカウンタ
 	void					DrawFPS(void);	// FPSの表示
+	bool					m_bColorFlag;	// 色変え判定
+	bool					m_bDeleteFlag;	// フォント判定
 };
 
 #endif // !_RENDERER_H_

@@ -24,6 +24,7 @@
 CPolygon::CPolygon(int nPriority) : CScene2D(nPriority)
 {
 	m_bTextureFlag = true;
+	m_nAns = 0;
 }
 
 //=============================================================================
@@ -77,52 +78,52 @@ void CPolygon::Uninit(void)
 void CPolygon::Update(void)
 {
 	// キーボード取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
 	// ゲームパッド取得
 	CPadX *pPadX = CManager::GetPadX();
 
 	// シフト押しながらで微調整
-	if (pInputKeyboard->GetPress(DIK_LSHIFT) == true || pInputKeyboard->GetPress(DIK_RSHIFT) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true)
+	if (pKeyboard->GetPress(DIK_LSHIFT) == true || pKeyboard->GetPress(DIK_RSHIFT) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true)
 	{
 		// 右移動
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_RIGHT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_RIGHT) == true)
+		if (pKeyboard->GetTrigger(DIK_RIGHT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_RIGHT) == true)
 		{
 			m_pos.x += 1.0f;
 		}
 		// 左移動
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_LEFT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_LEFT) == true)
+		if (pKeyboard->GetTrigger(DIK_LEFT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_LEFT) == true)
 		{
 			m_pos.x -= 1.0f;
 		}
 		// 下移動
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_DOWN) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_DOWN) == true)
+		if (pKeyboard->GetTrigger(DIK_DOWN) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_DOWN) == true)
 		{
 			m_pos.y += 1.0f;
 		}
 		// 上移動
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_UP) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_UP) == true)
+		if (pKeyboard->GetTrigger(DIK_UP) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_UP) == true)
 		{
 			m_pos.y -= 1.0f;
 		}
 
 		// 高さ拡大
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_W) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_UP) == true)
+		if (pKeyboard->GetTrigger(DIK_W) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_UP) == true)
 		{
 			m_size.y += 1.0f;
 		}
 		// 高さ縮小
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_S) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_DOWN) == true)
+		if (pKeyboard->GetTrigger(DIK_S) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_DOWN) == true)
 		{
 			m_size.y -= 1.0f;
 		}
 		// 幅拡大
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_D) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_RIGHT) == true)
+		if (pKeyboard->GetTrigger(DIK_D) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_RIGHT) == true)
 		{
 			m_size.x += 1.0f;
 		}
 		// 幅縮小
-		if (pInputKeyboard->GetKeyboardTrigger(DIK_A) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_LEFT) == true)
+		if (pKeyboard->GetTrigger(DIK_A) == true || pPadX->GetRightStickTrigger(pPadX->STICK_TYPE_LEFT) == true)
 		{
 			m_size.x -= 1.0f;
 		}
@@ -130,50 +131,50 @@ void CPolygon::Update(void)
 	else
 	{
 		// 右移動
-		if (pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true)
+		if (pKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true)
 		{
 			m_pos.x += 4.0f;
 		}
 		// 左移動
-		if (pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true)
+		if (pKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true)
 		{
 			m_pos.x -= 4.0f;
 		}
 		// 下移動
-		if (pInputKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) == true)
+		if (pKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) == true)
 		{
 			m_pos.y += 4.0f;
 		}
 		// 上移動
-		if (pInputKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true)
+		if (pKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true)
 		{
 			m_pos.y -= 4.0f;
 		}
 
 		// 高さ拡大
-		if (pInputKeyboard->GetPress(DIK_W) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_UP) == true)
+		if (pKeyboard->GetPress(DIK_W) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_UP) == true)
 		{
 			m_size.y += 2.0f;
 		}
 		// 高さ縮小
-		if (pInputKeyboard->GetPress(DIK_S) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_DOWN) == true)
+		if (pKeyboard->GetPress(DIK_S) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_DOWN) == true)
 		{
 			m_size.y -= 2.0f;
 		}
 		// 幅拡大
-		if (pInputKeyboard->GetPress(DIK_D) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_RIGHT) == true)
+		if (pKeyboard->GetPress(DIK_D) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_RIGHT) == true)
 		{
 			m_size.x += 2.0f;
 		}
 		// 幅縮小
-		if (pInputKeyboard->GetPress(DIK_A) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_LEFT) == true)
+		if (pKeyboard->GetPress(DIK_A) == true || pPadX->GetRightStick(pPadX->STICK_TYPE_LEFT) == true)
 		{
 			m_size.x -= 2.0f;
 		}
 	}
 
 	// 位置高さリセット
-	if (pInputKeyboard->GetPress(DIK_X) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_Y) == true)
+	if (pKeyboard->GetRelease(DIK_X) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_Y) == true)
 	{
 		m_size.x = 40.0f;
 		m_size.y = 40.0f;
@@ -182,18 +183,17 @@ void CPolygon::Update(void)
 	}
 
 	// ファイルに書き出し
-	if (pInputKeyboard->GetPress(DIK_P) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true)
+	if (pKeyboard->GetTrigger(DIK_P) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true)
 	{
-		FILE *pFile = fopen("text//pos.txt", "w");
+		FILE *pFile = fopen("data//text//pos.txt", "w");
 
 		if (pFile != NULL)
 		{
 			fprintf(pFile, "D3DXVECTOR3(%.1ff, %.1ff, %.1ff), D3DXVECTOR2(%.1ff, %.1ff)", m_pos.x, m_pos.y, m_pos.z, m_size.x, m_size.y);
 		}
 	}
-
-	// テクスチャ反映/解除
-	if (pInputKeyboard->GetKeyboardTrigger(DIK_RETURN) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_B) == true)
+		// テクスチャ反映/解除
+	if (pKeyboard->GetTrigger(DIK_RETURN) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_B) == true)
 	{
 		if (m_bTextureFlag == true)
 		{
@@ -208,13 +208,13 @@ void CPolygon::Update(void)
 			m_bTextureFlag = true;
 		}
 	}
-	// 位置設定
-	SetPosition(m_pos);
+		// 位置設定
+		SetPosition(m_pos);
 
-	// 大きさ設定
-	SetSize(m_size);
+		// 大きさ設定
+		SetSize(m_size);
 
-	CScene2D::Update();
+		CScene2D::Update();
 }
 
 //=============================================================================

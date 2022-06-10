@@ -25,7 +25,7 @@
 //前方宣言
 //*****************************************************************************
 class CRenderer;
-class CInputKeyboard;
+class CKeyboard;
 class CPadX;
 class CPolygon;
 class CTexture;
@@ -46,7 +46,7 @@ public:
 
 
 	static CRenderer		*GetRenderer(void);
-	static CInputKeyboard	*GetInputKeyboard(void);
+	static CKeyboard		*GetKeyboard(void);
 	static CPadX			*GetPadX(void);
 	static CPolygon			*GetPolygon(void);
 	static CTexture			*GetTexture(void);
@@ -54,7 +54,7 @@ public:
 private:
 	// 各種ポインタ
 	static CRenderer		*m_pRenderer;
-	static CInputKeyboard	*m_pInputKeyboard;
+	static CKeyboard		*m_pKeyboard;
 	static CPadX			*m_pPadX;
 	static CPolygon			*m_pPolygon;
 	static CTexture			*m_pTexture;
