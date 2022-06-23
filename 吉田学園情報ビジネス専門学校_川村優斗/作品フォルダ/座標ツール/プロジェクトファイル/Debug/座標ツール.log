@@ -1,9 +1,8 @@
-﻿  polygon.cpp
+﻿  manager.cpp
   コードを生成中...
   コンパイル中...
-  texture.cpp
-  manager.cpp
-  bg.cpp
+  polygon.cpp
+c:\users\student\documents\visual studio 2015\projects\座標ツール\polygon.cpp(27): error C2065: 'm_nAns': 定義されていない識別子です。
   コードを生成中...
-  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Debug\座標ツール.exe
-  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Debug\座標ツール.pdb (Full PDB)
+  スキップ中... (関連する変更は検出されませんでした)
+  renderer.cpp
