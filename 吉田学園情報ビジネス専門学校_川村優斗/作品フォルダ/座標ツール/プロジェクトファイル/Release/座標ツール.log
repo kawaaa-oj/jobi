@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿  manager.cpp
   polygon.cpp
 polygon.cpp(27): error C2065: 'm_nAns': 定義されていない識別子です。
@@ -12,3 +13,16 @@ renderer.cpp(228): warning C4244: '=': 'float' から 'int' への変換です�
 renderer.cpp(229): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
 renderer.cpp(230): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
 renderer.cpp(231): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+=======
+﻿  bg.cpp
+  manager.cpp
+  polygon.cpp
+  texture.cpp
+  コード生成しています。
+  2 of 115 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Release\座標ツール.exe
+  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Release\座標ツール.pdb (Full PDB)
+>>>>>>> c2521e9649f48106001b277f91f2b67b1248d1ab

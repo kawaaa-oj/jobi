@@ -42,6 +42,11 @@ private:
 	D3DXVECTOR3					m_pos;			// 位置
 	D3DXVECTOR2					m_size;			// 大きさ
 
+<<<<<<< HEAD
+=======
+	int m_nAns;
+
+>>>>>>> c2521e9649f48106001b277f91f2b67b1248d1ab
 	bool						m_bTextureFlag;	// テクスチャが反映されているか
 };
 
