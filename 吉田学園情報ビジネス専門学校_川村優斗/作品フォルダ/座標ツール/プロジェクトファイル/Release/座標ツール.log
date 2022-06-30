@@ -1,14 +1,8 @@
-﻿  manager.cpp
-  polygon.cpp
-polygon.cpp(27): error C2065: 'm_nAns': 定義されていない識別子です。
-  renderer.cpp
-renderer.cpp(206): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(207): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(208): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(209): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(210): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(227): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(228): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(229): warning C4244: '=': 'float' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(230): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
-renderer.cpp(231): warning C4244: '=': 'FLOAT' から 'int' への変換です。データが失われる可能性があります。
+﻿  polygon.cpp
+  コード生成しています。
+  6 of 115 functions ( 5.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Release\座標ツール.exe
+  座標ツール.vcxproj -> C:\Users\student\Documents\Visual Studio 2015\Projects\座標ツール\Release\座標ツール.pdb (Full PDB)

@@ -24,7 +24,6 @@
 CPolygon::CPolygon(int nPriority) : CScene2D(nPriority)
 {
 	m_bTextureFlag = true;
-	m_nAns = 0;
 }
 
 //=============================================================================
