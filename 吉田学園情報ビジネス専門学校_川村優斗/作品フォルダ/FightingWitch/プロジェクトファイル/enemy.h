@@ -56,15 +56,19 @@ protected:
 
 
 private:
-	D3DXVECTOR3					m_move;			// 移動量
-	D3DXVECTOR3					m_pos;			// 座標
-	D3DXVECTOR3					m_PlayerPos;	// プレイヤーの座標
-	int							m_nLife;		// 寿命
-	int							m_BulletCount;	// 弾発射までのカウンタ
-	ENEMYTYPE					m_type;			// 敵のタイプ
-	bool						m_bFlag;		// ジグザクタイプの敵の上下判定
-	bool						m_bDeadFlag;	// 死んだ判定
-	int							m_nCounterAnim;	// カウンター
-	int							m_nPatternAnim;	// パターンナンバー
+	D3DXVECTOR3	m_move;			// 移動量
+	D3DXVECTOR3	m_pos;			// 座標
+	D3DXVECTOR3	m_PlayerPos;	// プレイヤーの座標
+
+	ENEMYTYPE	m_type;			// 敵のタイプ
+
+	int			m_nLife;		// 寿命
+	int			m_BulletCount;	// 弾発射までのカウンタ
+	int			m_nCounterAnim;	// カウンター
+	int			m_nPatternAnim;	// パターンナンバー
+
+	bool		m_bFlag;		// ジグザクタイプの敵の上下判定
+	bool		m_bDeadFlag;	// 死んだ判定
+
 };
 #endif //!_ENEMY_H_

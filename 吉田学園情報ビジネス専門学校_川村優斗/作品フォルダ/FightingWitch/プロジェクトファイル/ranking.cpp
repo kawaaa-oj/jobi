@@ -44,11 +44,7 @@ HRESULT CRanking::Init(void)
 		m_pScore[nCntNum] = CScore::Create(D3DXVECTOR3(m_pos.x, m_pos.y + (100 * nCntNum), 0.0f), m_size);
 	}
 
-	if (m_bFlag == true)
-	{
-		m_pNowScore = CScore::Create(D3DXVECTOR3(90.0f, SCREEN_HEIGHT / 2, 0.0f), m_size);
-	}
-	//ロード処理
+	// ロード処理
 	FILE *pFile;
 
 	pFile = fopen("data//text//score.txt", "r");
@@ -79,14 +75,16 @@ HRESULT CRanking::Init(void)
 		}
 		fclose(pFile);
 	}
+
+	// ゲーム終了後の場合とメニューから開いた場合で処理を分ける
 	if (m_bFlag == true)
 	{
+		m_pNowScore = CScore::Create(D3DXVECTOR3(90.0f, SCREEN_HEIGHT / 2, 0.0f), m_size);
 		m_pNowScore->SetScore(nNewdata);
 		m_nScore[MAX_RANKING - 1] = nNewdata;
 	}
 
-	int nSubData = 0;
-
+	// 並べ替え
 	for (int nCntRank = 0; nCntRank < MAX_RANKING - 1; nCntRank++)
 	{
 		for (int nCntRank2 = 0; nCntRank2 < MAX_RANKING - 1; nCntRank2++)
@@ -100,6 +98,7 @@ HRESULT CRanking::Init(void)
 		}
 	}
 
+	// スコアを並べる
 	for (int nCntRank = 0; nCntRank < MAX_RANKING - 1; nCntRank++)
 	{
 		m_pScore[nCntRank]->SetScore(m_nScore[nCntRank]);
@@ -149,10 +148,10 @@ void CRanking::Draw(void)
 //=============================================================================
 CRanking * CRanking::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, bool bFlag)
 {
-	//ランキングのインスタンス生成
+	// ランキングのインスタンス生成
 	CRanking *pRanking = new CRanking;
 
-	//ランキングの準備
+	// ランキングの準備
 	if (pRanking != NULL)
 	{
 		pRanking->m_bFlag = bFlag;

@@ -28,6 +28,7 @@ CUI *CMenu::m_pUI[6] = {};
 CMenu::CMenu()
 {
 	m_fade = false;
+
 	// 初期状態（Startを選んでいる状態）
 	m_nCntSelect = 0;
 }
@@ -44,6 +45,7 @@ CMenu::~CMenu()
 //=============================================================================
 HRESULT CMenu::Init(void)
 {
+	// 背景の生成
 	CBg::Create(D3DXVECTOR3(0.0f + SCREEN_CENTER_X, 0.0f + SCREEN_CENTER_Y, 0.0f), D3DXVECTOR2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), CBg::BGTYPE_OTHER, CTexture::TEXTURETYPE_BGMENU);
 
 	// UI出す
@@ -54,10 +56,13 @@ HRESULT CMenu::Init(void)
 	m_pUI[4] = CUI::Create(D3DXVECTOR3(UITEXT_X, UIINFO_Y, 0.0f), D3DXVECTOR2(UIINFO_WIDTH, UIINFO_HEIGHT), CTexture::TEXTURETYPE_MENUTEXT);
 	m_pUI[5] = CUI::Create(D3DXVECTOR3(250.0f, 150.0f, 0.0f), D3DXVECTOR2(55.0f, 50.0f), CTexture::TEXTURETYPE_PLAYER);
 
-	m_pUI[4]->SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+	// 説明文のテクスチャ調整
+	m_pUI[4]->SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 
-	//サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
+
+	// 音楽の再生、音量調整
 	pSound->Play(pSound->SOUND_LABEL_BGM_MENU);
 	pSound->SetVolume(pSound->SOUND_LABEL_BGM_MENU, 0.5f);
 
@@ -69,8 +74,10 @@ HRESULT CMenu::Init(void)
 //=============================================================================
 void CMenu::Uninit(void)
 {
-	//サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
+
+	// 音楽の停止
 	pSound->Stop(pSound->SOUND_LABEL_BGM_MENU);
 
 	Release();
@@ -84,15 +91,17 @@ void CMenu::Update(void)
 	// フェードの取得
 	CFade *pFade = CManager::GetFade();
 
-	//サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// キーボードの取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
 	// ゲームパッドの取得
 	CPadX *pPadX = CManager::GetPadX();
-	m_pUI[5]->SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+
+	// 選択カーソルのテクスチャ調整
+	m_pUI[5]->SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 
 	// UIの色々処理（Startのときにこれを出す、Tutorialのときにこれを出す…）
 	switch (m_nCntSelect)
@@ -102,7 +111,7 @@ void CMenu::Update(void)
 		m_pUI[1]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[2]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[3]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
-		m_pUI[4]->SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+		m_pUI[4]->SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		m_pUI[5]->SetPosition(D3DXVECTOR3(250.0f, 150.0f, 0.0f));
 		break;
 	case SELECT_TUTORIAL:
@@ -110,7 +119,7 @@ void CMenu::Update(void)
 		m_pUI[1]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pUI[2]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[3]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
-		m_pUI[4]->SetVtxTex(1, 0.25f, 0.25f, 1.0f);
+		m_pUI[4]->SetVtxTex(1, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		m_pUI[5]->SetPosition(D3DXVECTOR3(250.0f, 270.0f, 0.0f));
 		break;
 	case SELECT_RANKING:
@@ -118,7 +127,7 @@ void CMenu::Update(void)
 		m_pUI[1]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[2]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 		m_pUI[3]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
-		m_pUI[4]->SetVtxTex(2, 0.25f, 0.25f, 1.0f);
+		m_pUI[4]->SetVtxTex(2, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		m_pUI[5]->SetPosition(D3DXVECTOR3(250.0f, 390.0f, 0.0f));
 		break;
 	case SELECT_QUIT:
@@ -126,7 +135,7 @@ void CMenu::Update(void)
 		m_pUI[1]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[2]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 0.1f));
 		m_pUI[3]->SetColor(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
-		m_pUI[4]->SetVtxTex(3, 0.25f, 0.25f, 1.0f);
+		m_pUI[4]->SetVtxTex(3, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		m_pUI[5]->SetPosition(D3DXVECTOR3(250.0f, 510.0f, 0.0f));
 		break;
 	default:
@@ -134,11 +143,13 @@ void CMenu::Update(void)
 	}
 
 	// メニュー移動（↓）
-	if (pInputKeyboard->GetKeyboardTrigger(DIK_DOWN) == true || pInputKeyboard->GetKeyboardTrigger(DIK_S) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_DOWN) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_DOWN) == true)
+	if (pKeyboard->GetTrigger(DIK_DOWN) == true || pKeyboard->GetTrigger(DIK_S) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_DOWN) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_DOWN) == true)
 	{
+		// サウンドの再生、音量調整
 		pSound->Play(pSound->SOUND_LABEL_SELECT);
 		pSound->SetVolume(pSound->SOUND_LABEL_SELECT, 0.5f);
 
+		// メニュー移動
 		switch (m_nCntSelect)
 		{
 		case SELECT_PLAY:
@@ -157,10 +168,13 @@ void CMenu::Update(void)
 	}
 
 	// メニュー移動（↑）
-	if (pInputKeyboard->GetKeyboardTrigger(DIK_UP) == true || pInputKeyboard->GetKeyboardTrigger(DIK_W) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_UP) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_UP) == true)
+	if (pKeyboard->GetTrigger(DIK_UP) == true || pKeyboard->GetTrigger(DIK_W) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_UP) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_UP) == true)
 	{
+		// サウンドの再生、音量調整
 		pSound->Play(pSound->SOUND_LABEL_SELECT);
 		pSound->SetVolume(pSound->SOUND_LABEL_SELECT, 0.5f);
+
+		// メニュー移動
 		switch (m_nCntSelect)
 		{
 		case SELECT_PLAY:

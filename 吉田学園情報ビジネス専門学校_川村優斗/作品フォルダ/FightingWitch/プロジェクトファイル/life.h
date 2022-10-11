@@ -12,7 +12,6 @@
 // インクルードファイル
 //*****************************************************************************
 #include"scene.h"
-#include"polygon.h"
 #include"ui.h"
 
 //*****************************************************************************
@@ -45,9 +44,11 @@ public:
 
 private:
 	CUI			*m_apPolygon[MAX_LIFE];	// ポリゴンのインスタンス
-	int			m_nLife;				// ライフ数
 	D3DXVECTOR2 m_size;					// サイズ
 	D3DXVECTOR3 m_pos;					// 位置
+
+	int			m_nLife;				// ライフ数
+
 	bool		m_fade;					// フェード判定
 
 };

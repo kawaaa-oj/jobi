@@ -65,7 +65,7 @@ void CBullet::Uninit(void)
 void CBullet::Update(void)
 {
 	// プレイヤーの移動
-	D3DXVECTOR3 pPos = Getposition();
+	D3DXVECTOR3 pPos = GetPosition();
 	m_pos = pPos;
 
 	// 敵の情報の取得
@@ -74,7 +74,7 @@ void CBullet::Update(void)
 	// スコアの取得
 	CScore *pScore = CGame::GetScore();
 
-	// 現在の時間を取得
+	// 現在の残り時間を取得
 	CTime *pTime = CGame::GetTime();
 	int nTime = pTime->GetTime();
 
@@ -113,7 +113,7 @@ void CBullet::Update(void)
 				CScene::OBJTYPE objType = pScene->GetObjType();
 
 				// 敵の位置を取得
-				D3DXVECTOR3 pos = ((CScene2D*)pScene)->Getposition();
+				D3DXVECTOR3 pos = ((CScene2D*)pScene)->GetPosition();
 
 				// 敵の大きさを取得
 				D3DXVECTOR2 size = ((CScene2D*)pScene)->GetSize();
@@ -123,10 +123,10 @@ void CBullet::Update(void)
 				{
 					if (pPos.y <= pos.y + size.y && pPos.x <= pos.x + size.x && pPos.y >= pos.y - size.y && pPos.x >= pos.x - size.x)
 					{
-						// サウンド取得
+						// サウンドの取得
 						CSound *pSound = CManager::GetSound();
 
-						// 爆発音再生
+						// 爆発音再生、音量調整
 						pSound->Play(pSound->SOUND_LABEL_EXPLOSION);
 						pSound->SetVolume(pSound->SOUND_LABEL_EXPLOSION, 0.5f);
 
@@ -141,14 +141,17 @@ void CBullet::Update(void)
 
 						// 消える
 						Uninit();
+
 						return;
 					}
 				}
 			}
 		}
 	}
+
 	// 寿命を減らす
 	m_nLife--;
+
 	if (nTime != 0)
 	{
 		if (m_nLife == 0)
@@ -176,8 +179,6 @@ void CBullet::Draw(void)
 //=============================================================================
 void CBullet::ItemCreate(void)
 {
-	int m_nRand, nRand2;
-
 	// アイテムの出現率
 	int nItemInterval;
 
@@ -186,6 +187,7 @@ void CBullet::ItemCreate(void)
 
 	if (pFile != NULL)
 	{
+		// END_SCRIPTまで無限に回す
 		while (true)
 		{
 			fscanf(pFile, "%s", &aFile[0]);
@@ -203,6 +205,8 @@ void CBullet::ItemCreate(void)
 		}
 		fclose(pFile);
 	}
+
+	int m_nRand, nRand2;	// アイテム関連のランダム格納用
 
 	// アイテムを出すか
 	m_nRand = rand() % nItemInterval;

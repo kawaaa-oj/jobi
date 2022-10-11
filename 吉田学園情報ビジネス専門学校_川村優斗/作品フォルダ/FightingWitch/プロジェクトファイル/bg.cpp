@@ -76,6 +76,23 @@ void CBg::Update(void)
 
 	CScene2D::Update();
 
+	BgMove();
+
+}
+
+//=============================================================================
+// •`‰æˆ—
+//=============================================================================
+void CBg::Draw(void)
+{
+	CScene2D::Draw();
+}
+
+//=============================================================================
+// ”wŒi‚Ì“®‚«
+//=============================================================================
+void CBg::BgMove(void)
+{
 	switch (m_nType)
 	{
 	case BGTYPE_GAME1:
@@ -86,7 +103,7 @@ void CBg::Update(void)
 			{
 				m_fPosV[0] -= 1.0f;
 			}
-			CScene2D::SetVtxTex(1, m_fPosV[0], 1.0f, 1.0f);
+			CScene2D::SetVtxTex(1, m_fPosV[0], D3DXVECTOR2(1.0f, 1.0f));
 		}
 		break;
 	case BGTYPE_GAME2:
@@ -97,7 +114,7 @@ void CBg::Update(void)
 			{
 				m_fPosV[1] -= 1.0f;
 			}
-			CScene2D::SetVtxTex(1, m_fPosV[1], 1.0f, 1.0f);
+			CScene2D::SetVtxTex(1, m_fPosV[1], D3DXVECTOR2(1.0f, 1.0f));
 		}
 		break;
 	case BGTYPE_GAME3:
@@ -108,124 +125,68 @@ void CBg::Update(void)
 			{
 				m_fPosV[2] -= 1.0f;
 			}
-			CScene2D::SetVtxTex(1, m_fPosV[2], 1.0f, 1.0f);
+			CScene2D::SetVtxTex(1, m_fPosV[2], D3DXVECTOR2(1.0f, 1.0f));
 		}
 		break;
 	case BGTYPE_HELP1:
 		if (m_mode == CManager::MODE_HELP)
 		{
-			switch (m_nHelpNum)
+			if (m_nHelpNum == 0)
 			{
-			case 0:
 				m_col.a = 1.0f;
-				SetColor(m_col);
-				break;
-			case 1:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 2:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 3:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			default:
-				break;
 			}
+			else
+			{
+				m_col.a = 0.0f;
+			}
+			SetColor(m_col);
 		}
 		break;
 	case BGTYPE_HELP2:
 		if (m_mode == CManager::MODE_HELP)
 		{
-			switch (m_nHelpNum)
+			if (m_nHelpNum == 1)
 			{
-			case 0:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 1:
 				m_col.a = 1.0f;
-				SetColor(m_col);
-				break;
-			case 2:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 3:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			default:
-				break;
 			}
+			else
+			{
+				m_col.a = 0.0f;
+			}
+			SetColor(m_col);
 		}
 		break;
 	case BGTYPE_HELP3:
 		if (m_mode == CManager::MODE_HELP)
 		{
-			switch (m_nHelpNum)
+			if (m_nHelpNum == 2)
 			{
-			case 0:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 1:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 2:
 				m_col.a = 1.0f;
-				SetColor(m_col);
-				break;
-			case 3:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			default:
-				break;
 			}
-			break;
+			else
+			{
+				m_col.a = 0.0f;
+			}
+			SetColor(m_col);
 		}
+		break;
 	case BGTYPE_HELPPAD:
 		if (m_mode == CManager::MODE_HELP)
 		{
-			switch (m_nHelpNum)
+			if (m_nHelpNum == 3)
 			{
-			case 0:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 1:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 2:
-				m_col.a = 0.0f;
-				SetColor(m_col);
-				break;
-			case 3:
 				m_col.a = 1.0f;
-				SetColor(m_col);
-				break;
-			default:
-				break;
 			}
+			else
+			{
+				m_col.a = 0.0f;
+			}
+			SetColor(m_col);
 		}
 		break;
 	default:
 		break;
 	}
-}
-
-//=============================================================================
-// •`‰æˆ—
-//=============================================================================
-void CBg::Draw(void)
-{
-	CScene2D::Draw();
 }
 
 
@@ -246,7 +207,7 @@ CBg * CBg::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, BGTYPE type, CTexture::TEXT
 		pBg->SetSize(size);
 		pBg->Init();
 		pBg->BindTexture(CManager::GetTexture()->SetTextureType(ntype));
-		pBg->SetVtxTex(0, 1.0f, 1.0f, 1.0f);
+		pBg->SetVtxTex(0, 1.0f, D3DXVECTOR2(1.0f, 1.0f));
 	}
 	return pBg;
 }

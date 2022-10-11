@@ -47,9 +47,9 @@ HRESULT CHelp::Init(void)
 	
 	CScene2D::Init();
 
-	//サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
-	//音楽の再生
+	// 音楽の再生
 	pSound->Play(pSound->SOUND_LABEL_BGM_HELP);
 	pSound->SetVolume(pSound->SOUND_LABEL_BGM_HELP, 0.3f);
 
@@ -61,9 +61,10 @@ HRESULT CHelp::Init(void)
 //=============================================================================
 void CHelp::Uninit(void)
 {
-	//サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
-	//音楽の再生
+
+	// 音楽の再生
 	pSound->Stop(pSound->SOUND_LABEL_BGM_HELP);
 
 	CScene2D::Uninit();
@@ -75,23 +76,23 @@ void CHelp::Uninit(void)
 void CHelp::Update(void)
 {
 	// 移動
-	D3DXVECTOR3 pPos = Getposition();
+	D3DXVECTOR3 pPos = GetPosition();
 	D3DXVECTOR2 pSize = GetSize();
 
 	// キーボード取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
 	// フェード取得
 	CFade *pFade = CManager::GetFade();
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// ゲームパッドの取得
 	CPadX *pPadX = CManager::GetPadX();
 
-	// ページ移動
-	if ((pInputKeyboard->GetKeyboardTrigger(DIK_D) == true) || (pInputKeyboard->GetKeyboardTrigger(DIK_RIGHT) == true) || (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true))
+	// ページ進む
+	if ((pKeyboard->GetTrigger(DIK_D) == true) || (pKeyboard->GetTrigger(DIK_RIGHT) == true) || (pKeyboard->GetTrigger(DIK_SPACE) == true))
 	{
 		if (m_uiNum == 0)
 		{
@@ -105,6 +106,7 @@ void CHelp::Update(void)
 		}
 		else if (m_uiNum == 2)
 		{
+			// メニューに戻る
 			if (m_fade == false)
 			{
 				pSound->Play(pSound->SOUND_LABEL_PAGE);
@@ -113,6 +115,8 @@ void CHelp::Update(void)
 			}
 		}
 	}
+
+	// ページ進む(パッド限定)
 	if ((pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_RIGHT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_RIGHT) == true)
 	{
 		if (m_uiNum == 0)
@@ -127,6 +131,7 @@ void CHelp::Update(void)
 		}
 		else if (m_uiNum == 2)
 		{
+			// メニューに戻る
 			if (m_fade == false)
 			{
 				pSound->Play(pSound->SOUND_LABEL_PAGE);
@@ -135,10 +140,13 @@ void CHelp::Update(void)
 			}
 		}
 	}
-	if ((pInputKeyboard->GetKeyboardTrigger(DIK_A) == true) || (pInputKeyboard->GetKeyboardTrigger(DIK_LEFT) == true))
+
+	// ページ戻る
+	if ((pKeyboard->GetTrigger(DIK_A) == true) || (pKeyboard->GetTrigger(DIK_LEFT) == true))
 	{
 		if (m_uiNum == 0)
 		{
+			// メニューに戻る
 			if (m_fade == false)
 			{
 				pSound->Play(pSound->SOUND_LABEL_PAGE);
@@ -158,10 +166,12 @@ void CHelp::Update(void)
 		}
 	}
 
+	// ページ戻る(パッド限定)
 	if ((pPadX->GetButtonTrigger(XINPUT_GAMEPAD_B) == true) || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_DPAD_LEFT) == true || pPadX->GetLeftStickTrigger(pPadX->STICK_TYPE_LEFT) == true)
 	{
 		if (m_uiNum == 0)
 		{
+			// メニューに戻る
 			if (m_fade == false)
 			{
 				pSound->Play(pSound->SOUND_LABEL_PAGE);
@@ -195,6 +205,9 @@ void CHelp::Draw(void)
 	CScene2D::Draw();
 }
 
+//=============================================================================
+// ページ数の取得
+//=============================================================================
 int CHelp::GetUInum(void)
 {
 	return m_uiNum;
@@ -206,12 +219,12 @@ int CHelp::GetUInum(void)
 CHelp * CHelp::Create(void)
 {
 	// 画面のインスタンス生成
-	CHelp *pMenuUI = new CHelp;
+	CHelp *pHelp = new CHelp;
 
 	// 画面の準備
-	if (pMenuUI != NULL)
+	if (pHelp != NULL)
 	{
-		pMenuUI->Init();
+		pHelp->Init();
 	}
-	return pMenuUI;
+	return pHelp;
 }

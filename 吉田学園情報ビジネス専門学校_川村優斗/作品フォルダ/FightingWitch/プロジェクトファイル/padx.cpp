@@ -77,14 +77,14 @@ void CPadX::Update(void)
 	}
 
 	// 左スティックの入力
-	if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&(state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
+	if ((state.Gamepad.sThumbLX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) && (state.Gamepad.sThumbLY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
 	{
 		state.Gamepad.sThumbLX = 0;
 		state.Gamepad.sThumbLY = 0;
 	}
 
 	// 右スティックの入力
-	if ((state.Gamepad.sThumbRX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&(state.Gamepad.sThumbRY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
+	if ((state.Gamepad.sThumbRX <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) && (state.Gamepad.sThumbRY <  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&state.Gamepad.sThumbRY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
 	{
 		state.Gamepad.sThumbRX = 0;
 		state.Gamepad.sThumbRY = 0;
@@ -112,6 +112,10 @@ void CPadX::Update(void)
 //=============================================================================
 bool CPadX::GetButtonPress(int nButton)
 {
+	if (m_bConnect == false)
+	{
+		return false;
+	}
 	return m_State.Gamepad.wButtons & nButton ? true : false;
 }
 
@@ -120,6 +124,10 @@ bool CPadX::GetButtonPress(int nButton)
 //=============================================================================
 bool CPadX::GetButtonTrigger(int nButton)
 {
+	if (m_bConnect == false)
+	{
+		return false;
+	}
 	return (((m_StateLast.Gamepad.wButtons & nButton) == false) && (m_State.Gamepad.wButtons & nButton)) ? true : false;
 }
 
@@ -128,6 +136,10 @@ bool CPadX::GetButtonTrigger(int nButton)
 //=============================================================================
 bool CPadX::GetButtonRelease(int nButton)
 {
+	if (m_bConnect == false)
+	{
+		return false;
+	}
 	return (((m_StateLast.Gamepad.wButtons & nButton) == false) && (m_State.Gamepad.wButtons & nButton)) ? true : false;
 }
 
@@ -395,4 +407,12 @@ void CPadX::SetVibe(int nLeftMotorSpeed, int nRightMotorSpeed, int nSecond)
 	XInputSetState(0, &m_Vibration);
 	m_nVibCount = nSecond;
 	m_bVibration = true;
+}
+
+//=============================================================================
+// パッド接続判定
+//=============================================================================
+bool CPadX::ConnectPad(void)
+{
+	return m_bConnect;
 }

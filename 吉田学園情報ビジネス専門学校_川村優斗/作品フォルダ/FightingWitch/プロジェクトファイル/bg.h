@@ -45,20 +45,23 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	void BgMove(void);
+
 	// 背景の生成
 	static CBg	*Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, BGTYPE type, CTexture::TEXTURE_TYPE ntype);
 
 private:
+	CManager::MODE				m_mode;					// モード
+	BGTYPE						m_nType;				// 背景のタイプ
+
 	D3DXVECTOR3					m_pos;					// 位置
 	D3DXCOLOR					m_col;					// 色
 	static LPDIRECT3DTEXTURE9	m_apTexture[BGTYPE_MAX];// 共有テクスチャのポインタ
+
 	float						m_fPosV[BGTYPE_MAX];	// テクスチャ座標
 	int							m_nPriority;			// 優先順位
-	BGTYPE						m_nType;				// 背景のタイプ
-	CManager::MODE				m_mode;					// モード
 	int							m_time;					// 残り時間
 	int							m_nHelpNum;				// ヘルプのページ数
-
 };
 
 #endif // !_BG_H_

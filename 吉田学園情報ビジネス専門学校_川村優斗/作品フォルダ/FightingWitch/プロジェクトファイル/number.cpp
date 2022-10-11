@@ -35,11 +35,12 @@ CNumber::~CNumber()
 //=============================================================================
 HRESULT CNumber::Load(void)
 {
-	//デバイスを取得する
+	// デバイスを取得する
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	//テクスチャの読み込み
+	// テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice, "data//picture//uinumber.png", &m_pTexture);
+
 	return S_OK;
 }
 
@@ -48,7 +49,7 @@ HRESULT CNumber::Load(void)
 //=============================================================================
 void CNumber::Unload(void)
 {
-	//テクスチャの破棄
+	// テクスチャの破棄
 	if (m_pTexture != NULL)
 	{
 		m_pTexture->Release();
@@ -61,7 +62,7 @@ void CNumber::Unload(void)
 //=============================================================================
 CNumber * CNumber::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size)
 {
-	//数字のインスタンス生成
+	// 数字のインスタンス生成
 	CNumber *pNumber = new CNumber;
 
 	if (pNumber != NULL)

@@ -76,7 +76,7 @@ void CEnemy::Uninit(void)
 		break;
 	case false:
 		// プレイヤーの移動と座標の代入
-		D3DXVECTOR3 pPos = Getposition();
+		D3DXVECTOR3 pPos = GetPosition();
 
 		// スコアの情報の取得
 		CScore *pScore = CGame::GetScore();
@@ -118,7 +118,7 @@ void CEnemy::Draw(void)
 void CEnemy::Update(void)
 {
 	// プレイヤーの移動と座標の代入
-	D3DXVECTOR3 pPos = Getposition();
+	D3DXVECTOR3 pPos = GetPosition();
 	m_pos = pPos;
 	D3DXVECTOR2 pSize = GetSize();
 
@@ -149,7 +149,7 @@ void CEnemy::Update(void)
 				CScene::OBJTYPE objType = pScene->GetObjType();
 
 				// 敵の位置を取得
-				D3DXVECTOR3 pos = ((CScene2D*)pScene)->Getposition();
+				D3DXVECTOR3 pos = ((CScene2D*)pScene)->GetPosition();
 
 				// 敵の大きさを取得
 				D3DXVECTOR2 size = ((CScene2D*)pScene)->GetSize();
@@ -165,7 +165,7 @@ void CEnemy::Update(void)
 						CPlayer::PLAYERSTATE state = pPlayer->GetState();
 						if (state == CPlayer::STATE_MUTEKI)
 						{
-							// サウンド取得
+							// サウンドの取得
 							CSound *pSound = CManager::GetSound();
 							pSound->Play(pSound->SOUND_LABEL_EXPLOSION);
 							pSound->SetVolume(pSound->SOUND_LABEL_EXPLOSION, 0.5f);
@@ -220,7 +220,7 @@ CEnemy * CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, CEn
 		// アニメーションの初期設定
 		if (type == ENEMY_NORMAL)
 		{
-			pEnemy->SetVtxTex(0, 0.5f, 0.5f, 1.0f);
+			pEnemy->SetVtxTex(0, 0.5f, D3DXVECTOR2(0.5f, 1.0f));
 		}
 	}
 
@@ -301,7 +301,7 @@ void CEnemy::EnemyMove(void)
 
 			m_nPatternAnim++;
 
-			CScene2D::SetVtxTex(m_nPatternAnim, 0.5f, 0.5f, 1.0f);
+			CScene2D::SetVtxTex(m_nPatternAnim, 0.5f, D3DXVECTOR2(0.5f, 1.0f));
 		}
 	}
 

@@ -4,7 +4,6 @@
 // Author : 川村優斗
 //
 //=============================================================================
-// プリプロセッサ
 #ifndef _SCENE2D_H_
 #define _SCENE2D_H_
 
@@ -18,7 +17,7 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)//頂点フォーマット(頂点座標(2d) | 頂点カラー)
+#define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)// 頂点フォーマット(頂点座標(2d) | 頂点カラー)
 #define SCREEN_CENTER_X (SCREEN_WIDTH / 2)							// 画面の真ん中
 #define SCREEN_CENTER_Y (SCREEN_HEIGHT / 2)							// 画面の真ん中
 #define NUM_VERTEX 4
@@ -32,10 +31,10 @@
 typedef struct
 {
 
-	D3DXVECTOR3	pos;	//頂点座標
-	float		rhw;	//1.0fで固定
-	D3DCOLOR	col;	//色
-	D3DXVECTOR2 tex;	//テクスチャ座標
+	D3DXVECTOR3	pos;	// 頂点座標
+	float		rhw;	// 1.0fで固定
+	D3DCOLOR	col;	// 色
+	D3DXVECTOR2 tex;	// テクスチャ座標
 
 } VERTEX_2D;
 
@@ -56,7 +55,7 @@ public:
 	//ポリゴンの生成
 	static CScene2D *Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size);
 
-	D3DXVECTOR3 Getposition(void);
+	D3DXVECTOR3 GetPosition(void);
 	D3DXVECTOR2 GetSize(void);
 
 	void SetPosition(D3DXVECTOR3 pos);
@@ -64,17 +63,19 @@ public:
 	void SetSize(D3DXVECTOR2 size);
 	void SetColor(D3DXCOLOR col);
 
-	void SetVtxTex(int PtnAnim, float fAnimU, float TexU, float TexV);
+	void SetVtxTex(int PtnAnim, float fAnimU, D3DXVECTOR2 Tex);
 
 private:
 	LPDIRECT3DTEXTURE9		m_pTexture;	// テクスチャへのポインタ
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuff;	// 頂点バッファへのポインタ
+
 	D3DXVECTOR3				m_pos;		// ポリゴンの位置
 	D3DXVECTOR3				m_move;		// ポリゴンの位置
 	D3DXCOLOR				m_col;		// 色
 	D3DXVECTOR2				m_size;		// サイズ
-	float					m_FTexU;	// テクスチャ座標
-	float					m_FTexV;	// テクスチャ座標
+
+	float					m_FTexU;	// テクスチャ座標(U)
+	float					m_FTexV;	// テクスチャ座標(V)
 
 };
 

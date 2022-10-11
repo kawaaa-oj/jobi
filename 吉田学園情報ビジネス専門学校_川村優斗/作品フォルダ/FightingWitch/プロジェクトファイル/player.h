@@ -50,18 +50,21 @@ public:
 	static CPlayer *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, CTexture::TEXTURE_TYPE type);
 
 private:
-	bool		m_break;		// –³“G”»’è
 	D3DXCOLOR	m_col;			// F
-	int			m_breakCnt;		// –³“GŠÔ
 	D3DXVECTOR3	m_pos;			// ˆÊ’u
-	bool		m_Itembreak;	// –³“G”»’è
-	int			m_ItembreakCnt;	// –³“GŠÔ
+
 	PLAYERSTATE	m_state;		// ó‘Ô
+
+	int			m_breakCnt;		// –³“GŠÔ
+	int			m_ItembreakCnt;	// –³“GŠÔ
 	int			m_nCntSuper;	// ˜AËŠÔ
+	int			m_BulletBreak;	// ˜AËŠÔŠu
+
+	bool		m_bVibeFlag;	// U“®”»’è
 	bool		m_bTypeBreak;	// ƒ_ƒ[ƒW”»’è
 	bool		m_bNormal;		// ’Êí”»’è
-	int			m_BulletBreak;	// ˜AËŠÔŠu
-	bool		m_bVibeFlag;	// U“®”»’è
+	bool		m_Itembreak;	// –³“G”»’è
+	bool		m_break;		// –³“G”»’è
 };
 
 #endif // !_PLAYER_H_

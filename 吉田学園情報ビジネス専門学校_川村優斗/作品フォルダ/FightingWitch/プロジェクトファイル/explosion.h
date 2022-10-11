@@ -32,8 +32,8 @@ public:
 	static CExplosion *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, CTexture::TEXTURE_TYPE type);
 
 private:
-	int							m_nCounterAnim;	// カウンター
-	int							m_nPatternAnim;	// パターンナンバー
+	int	m_nCounterAnim;	// カウンター
+	int	m_nPatternAnim;	// パターンナンバー
 
 };
 

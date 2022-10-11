@@ -44,16 +44,19 @@ public:
 
 private:
 	CNumber		*m_apNumber[MAX_TIME];	// ナンバーのインスタンス
-	int			m_nTime;				// 時間
-	D3DXVECTOR2 m_size;					// 大きさ
-	D3DXVECTOR3 m_pos;					// 位置
-	D3DXCOLOR	m_col;					// 色
-	bool		m_fade;					// フェード判定
-	bool		m_bflag;				// タイムアップ判定
-	int			m_nInterval;			// UIを出すまでの間隔
+
 	DWORD		m_dwCurrentTime;		// 経過時間
 	DWORD		m_dwExecLastTime;		// 経過時間
 
+	D3DXVECTOR2 m_size;					// 大きさ
+	D3DXVECTOR3 m_pos;					// 位置
+	D3DXCOLOR	m_col;					// 色
+
+	bool		m_fade;					// フェード判定
+	bool		m_bflag;				// タイムアップ判定
+
+	int			m_nTime;				// 時間
+	int			m_nInterval;			// UIを出すまでの間隔
 };
 
 #endif // !_TIME_H_

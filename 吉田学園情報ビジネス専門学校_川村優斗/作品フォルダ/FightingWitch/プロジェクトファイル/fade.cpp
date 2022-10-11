@@ -33,6 +33,7 @@ HRESULT CFade::Init(void)
 {
 	CScene2D::Init();
 
+	// ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	m_fade = FADE_IN;
 	m_col = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.0f);
 

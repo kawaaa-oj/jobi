@@ -31,8 +31,8 @@ public:
 	static CEnemyBullet	*Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, int life, CTexture::TEXTURE_TYPE type);
 
 private:
-	D3DXVECTOR3					m_move;		//ˆÚ“®—Ê
-	int							m_nLife;	//Žõ–½
+	D3DXVECTOR3	m_move;		// ˆÚ“®—Ê
+	int			m_nLife;	// Žõ–½
 
 };
 

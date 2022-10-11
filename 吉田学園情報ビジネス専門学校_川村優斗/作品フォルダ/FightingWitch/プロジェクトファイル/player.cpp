@@ -76,7 +76,7 @@ CPlayer * CPlayer::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, CTexture::TEXTURE_T
 		pPlayer->SetSize(size);
 		pPlayer->SetPosition(pos);
 		pPlayer->BindTexture(CManager::GetTexture()->SetTextureType(type));
-		pPlayer->SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+		pPlayer->SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 	}
 	return pPlayer;
 }
@@ -112,16 +112,16 @@ void CPlayer::Uninit(void)
 void CPlayer::Update(void)
 {
 	// キーボード取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// ゲームパッドの取得
 	CPadX *pPadX = CManager::GetPadX();
 
 	// プレイヤーの移動
-	m_pos = Getposition();
+	m_pos = GetPosition();
 	D3DXVECTOR2 pSize = GetSize();
 
 	// 色の設定
@@ -131,7 +131,7 @@ void CPlayer::Update(void)
 	CTime *pTime = CGame::GetTime();
 	int nTime = pTime->GetTime();
 
-	//ライフの取得
+	// ライフの取得
 	CLife *pLife = CGame::GetLife();
 	int nLife = pLife->GetLife();
 
@@ -146,7 +146,7 @@ void CPlayer::Update(void)
 			m_col = D3DXCOLOR(255, 255, 255, 255);
 			
 			// 色を青っぽく
-			CScene2D::SetVtxTex(1, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(1, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 
 			// BGM止める
 			pSound->Stop(pSound->SOUND_LABEL_BGM_GAME);
@@ -163,7 +163,7 @@ void CPlayer::Update(void)
 			m_nCntSuper++;
 
 			// 連射！
-			if (pInputKeyboard->GetPress(DIK_SPACE) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_A) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true)	//弾発射
+			if (pKeyboard->GetPress(DIK_SPACE) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_A) == true || pPadX->GetButtonPress(XINPUT_GAMEPAD_RIGHT_SHOULDER) == true)	//弾発射
 			{
 				m_BulletBreak++;
 
@@ -176,11 +176,11 @@ void CPlayer::Update(void)
 			}
 			if ((m_nCntSuper >= 300) && (m_nCntSuper % 5 == 0))
 			{// 色と無敵時間を戻す
-				CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+				CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 			}
 			else if ((m_nCntSuper >= 300) && (m_nCntSuper % 5 != 0))
 			{// 無敵時間警告
-				CScene2D::SetVtxTex(1, 0.25f, 0.25f, 1.0f);
+				CScene2D::SetVtxTex(1, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 			}
 
 			// 通常状態に戻る
@@ -197,7 +197,7 @@ void CPlayer::Update(void)
 				{
 					m_state = STATE_NORMAL;
 				}
-				CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+				CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 				m_nCntSuper = 0;
 				m_bNormal = false;
 
@@ -206,7 +206,7 @@ void CPlayer::Update(void)
 		else
 		{
 			// 普通のときは普通の弾を
-			if (pInputKeyboard->GetKeyboardTrigger(DIK_SPACE) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true)	//弾発射
+			if (pKeyboard->GetTrigger(DIK_SPACE) == true || pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A) == true)
 			{
 				CBullet::Create(D3DXVECTOR3(m_pos.x, m_pos.y - 5.0f, 0.0f), D3DXVECTOR3(15.0f, 0.0f, 0.0f), D3DXVECTOR2(30.0f, 10.0f), 0, 60, CTexture::TEXTURETYPE_BULLET);
 			}
@@ -227,26 +227,26 @@ void CPlayer::Update(void)
 			pSound->SetVolume(pSound->SOUND_LABEL_BGM_MUTEKI, 0.3f);
 			m_bNormal = true;
 		}
-		//無敵カウンタを増やし
+		// 無敵カウンタを増やし
 		if (nTime != 0)
 		{
 			m_ItembreakCnt++;
 		}
 		// 色を半透明に
-		CScene2D::SetVtxTex(2, 0.25f, 0.25f, 1.0f);
+		CScene2D::SetVtxTex(2, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		// 無敵時間終了
 		if ((m_ItembreakCnt >= 350) && (m_ItembreakCnt % 5 == 0))
 		{// 色と無敵時間を戻す
-			CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		}
 		else if ((m_ItembreakCnt >= 350) && (m_ItembreakCnt % 5 != 0))
 		{// 無敵時間警告
-			CScene2D::SetVtxTex(2, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(2, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 		}
 		// アイテム無敵時間終了
 		if (m_ItembreakCnt >= 500)
 		{// 色と無敵時間を戻す
-			CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 			m_ItembreakCnt = 0;
 			pSound->Stop(pSound->SOUND_LABEL_BGM_MUTEKI);
 			pSound->Play(pSound->SOUND_LABEL_BGM_GAME);
@@ -283,7 +283,7 @@ void CPlayer::Update(void)
 		{
 			m_breakCnt++;
 		}
-		CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+		CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 
 		// 色を半透明に
 		m_col.a = 0.5f;
@@ -296,7 +296,7 @@ void CPlayer::Update(void)
 		{// 色と無敵時間を戻す
 			m_break = false;
 			m_col = D3DXCOLOR(255, 255, 255, 255);
-			CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 			if (nLife <= 1)
 			{
 				m_state = STATE_SINISOU;
@@ -346,7 +346,7 @@ void CPlayer::Update(void)
 				CScene::OBJTYPE objType = pScene->GetObjType();
 
 				// 敵の位置を取得
-				D3DXVECTOR3 pos = ((CScene2D*)pScene)->Getposition();
+				D3DXVECTOR3 pos = ((CScene2D*)pScene)->GetPosition();
 
 				// 敵の大きさを取得
 				D3DXVECTOR2 size = ((CScene2D*)pScene)->GetSize();
@@ -364,7 +364,8 @@ void CPlayer::Update(void)
 				if (objType == OBJTYPE_ENEMY)
 				{
 					if (m_pos.y <= pos.y + size.y && m_pos.x <= pos.x + size.x && m_pos.y >= pos.y - size.y && m_pos.x >= pos.x - size.x)
-					{// 無敵時間突入
+					{
+						// 無敵時間突入
 						m_nCntSuper = 0;
 						if (m_state != STATE_DAMAGE)
 						{
@@ -386,7 +387,8 @@ void CPlayer::Update(void)
 				else if (objType == OBJTYPE_ENEMYBULLET)
 				{
 					if (m_pos.y <= pos.y + 30.0f && m_pos.x <= pos.x + 30.0f && m_pos.y >= pos.y - 30.0f && m_pos.x >= pos.x - 30.0f)
-					{// 無敵時間突入
+					{
+						// 無敵時間突入
 						if (m_state != STATE_DAMAGE)
 						{
 							if (m_state != STATE_MUTEKI)
@@ -418,21 +420,21 @@ void CPlayer::Draw(void)
 void CPlayer::PlayerMove(void)
 {
 	// キーボード取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
 	// ゲームパッドの取得
 	CPadX *pPadX = CManager::GetPadX();
 
 	// 下移動
-	if (pInputKeyboard->GetPress(DIK_S) == true || pInputKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_DOWN)) == true)		//下移動
+	if (pKeyboard->GetPress(DIK_S) == true || pKeyboard->GetPress(DIK_DOWN) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_DOWN) || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_DOWN)) == true)		//下移動
 	{	// 右下
-		if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
+		if (pKeyboard->GetPress(DIK_D) == true || pKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
 		{
 			m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
 			m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
 		}
 		// 左下
-		else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
+		else if (pKeyboard->GetPress(DIK_A) == true || pKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
 		{
 			m_pos.x += sinf(D3DX_PI * 0.25f) * -20.0f;
 			m_pos.y += cosf(D3DX_PI * 0.25f) * 15.0f;
@@ -444,15 +446,15 @@ void CPlayer::PlayerMove(void)
 	}
 
 	// 上移動
-	else if (pInputKeyboard->GetPress(DIK_W) == true || pInputKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_UP)) == true)	//上移動
+	else if (pKeyboard->GetPress(DIK_W) == true || pKeyboard->GetPress(DIK_UP) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_UP) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_UP)) == true)	//上移動
 	{	// 右上
-		if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
+		if (pKeyboard->GetPress(DIK_D) == true || pKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)
 		{
 			m_pos.x += sinf(D3DX_PI * 0.75f) * 20.0f;
 			m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
 		}
 		// 左上
-		else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
+		else if (pKeyboard->GetPress(DIK_A) == true || pKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)
 		{
 			m_pos.x += sinf(D3DX_PI * 0.75f) * -20.0f;
 			m_pos.y += cosf(D3DX_PI * 0.25f) * -15.0f;
@@ -463,12 +465,12 @@ void CPlayer::PlayerMove(void)
 		}
 	}
 	// 右移動
-	else if (pInputKeyboard->GetPress(DIK_D) == true || pInputKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)	//右移動
+	else if (pKeyboard->GetPress(DIK_D) == true || pKeyboard->GetPress(DIK_RIGHT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_RIGHT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_RIGHT)) == true)	//右移動
 	{
 		m_pos.x += 20.0f;
 	}
 	// 左移動
-	else if (pInputKeyboard->GetPress(DIK_A) == true || pInputKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)	//左移動
+	else if (pKeyboard->GetPress(DIK_A) == true || pKeyboard->GetPress(DIK_LEFT) == true || pPadX->GetLeftStick(pPadX->STICK_TYPE_LEFT) == true || (pPadX->GetButtonPress(XINPUT_GAMEPAD_DPAD_LEFT)) == true)	//左移動
 	{
 		m_pos.x -= 20.0f;
 	}

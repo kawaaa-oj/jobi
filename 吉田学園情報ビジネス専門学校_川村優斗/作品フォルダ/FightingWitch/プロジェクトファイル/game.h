@@ -24,7 +24,6 @@ class CEnemyBullet;
 class CExplosion;
 class CItem;
 class CPlayer;
-class CRightMenu;
 class CScore;
 class CTime;
 
@@ -53,7 +52,6 @@ public:
 	static CLife			*GetLife(void);
 	static CEffect			*GetEffect(void);
 	static CTime			*GetTime(void);
-	static CRightMenu		*GetRightmenu(void);
 	static CItem			*GetItem(void);
 	static CEnemy			*GetEnemy(void);
 	static CEnemyBullet		*GetEnemyBullet(void);
@@ -67,17 +65,14 @@ private:
 	static CLife			*m_pLife;
 	static CEffect			*m_pEffect;
 	static CTime			*m_pTime;
-	static CRightMenu		*m_pRightmenu;
 	static CItem			*m_pItem;
 	static CEnemy			*m_pEnemy;
 	static CEnemyBullet		*m_pEnemyBullet;
-	int						m_nCnt;
-	float					m_fPos2;
-	int						m_nLife;
-	int						m_nTime;
-	int						m_nInterval;
 
+	int						m_nEnemyCnt;	// 敵の出現間隔
+	int						m_nLife;		// 体力
+	int						m_nTime;		// 制限時間
+	int						m_nItemPer;		// アイテムの出現率
+	float					m_fPos;			// 敵の出現位置
 };
-
-
 #endif // !_GAME_H_

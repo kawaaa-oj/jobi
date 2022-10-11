@@ -39,10 +39,11 @@ public:
 	static CBullet	*Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, int type, int life, CTexture::TEXTURE_TYPE ntype);
 
 private:
-	D3DXVECTOR3					m_move;	// 移動量
-	D3DXVECTOR3					m_pos;	// 位置
-	int							m_nLife;// 寿命
-	int							m_nType;// 弾のタイプ
+	D3DXVECTOR3	m_move;	// 移動量
+	D3DXVECTOR3	m_pos;	// 位置
+
+	int			m_nLife;// 寿命
+	int			m_nType;// 弾のタイプ
 };
 
 #endif // !_BULLET_H_

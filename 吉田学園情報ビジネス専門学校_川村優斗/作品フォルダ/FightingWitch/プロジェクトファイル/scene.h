@@ -4,8 +4,6 @@
 // Author : 川村優斗
 //
 //=============================================================================
-
-//プリプロセッサ
 #ifndef _SCENE_H_
 #define _SCENE_H_
 
@@ -29,7 +27,7 @@ public:
 	typedef enum
 	{
 		OBJTYPE_NONE = 0,
-		OBJTYPE_PLAYER,	// プレイヤー
+		OBJTYPE_PLAYER,		// プレイヤー
 		OBJTYPE_ENEMY,		// 敵
 		OBJTYPE_BULLET,		// 弾
 		OBJTYPE_ENEMYBULLET,// 敵弾
@@ -61,11 +59,11 @@ protected:
 	void Release(void);
 
 private:
-	static CScene	*m_apScene[MAX_PRI][MAX_SCENE];	//オブジェクトの配列
-	static int		m_nNumAll;						//オブジェクトの数
-	OBJTYPE			m_objType;						//オブジェクトの種類
-	int				m_nID;							//格納先の番号
-	int				m_nPriority;					//優先順位の番号
+	static CScene	*m_apScene[MAX_PRI][MAX_SCENE];	// オブジェクトの配列
+	static int		m_nNumAll;						// オブジェクトの数
+	OBJTYPE			m_objType;						// オブジェクトの種類
+	int				m_nID;							// 格納先の番号
+	int				m_nPriority;					// 優先順位の番号
 
 };
 

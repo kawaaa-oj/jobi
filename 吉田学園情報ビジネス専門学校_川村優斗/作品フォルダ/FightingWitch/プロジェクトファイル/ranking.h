@@ -39,12 +39,14 @@ public:
 	static CRanking *Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, bool bFlag);
 
 private:
-	int	m_nScore[MAX_RANKING];				// 格納するスコア
-	D3DXVECTOR2 m_size;						// サイズ
-	D3DXVECTOR3 m_pos;						// 位置
+	CScore			*m_pNowScore;			// 現在のスコア
 	static CScore	*m_pScore[MAX_RANKING];	// スコア情報
-	CScore *m_pNowScore;					// 現在のスコア
-	bool m_bFlag;							// メニューから開いた場合とゲーム終了時の判定
+
+	D3DXVECTOR2		m_size;					// サイズ
+	D3DXVECTOR3		m_pos;					// 位置
+
+	int		m_nScore[MAX_RANKING];			// 格納するスコア
+	bool	m_bFlag;						// メニューから開いた場合とゲーム終了時の判定
 };
 
 

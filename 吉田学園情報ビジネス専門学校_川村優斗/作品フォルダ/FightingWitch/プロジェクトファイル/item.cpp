@@ -81,7 +81,7 @@ void CItem::Uninit(void)
 void CItem::Update(void)
 {
 	// プレイヤーの情報を取得
-	D3DXVECTOR3 pPos = Getposition();
+	D3DXVECTOR3 pPos = GetPosition();
 	D3DXVECTOR2 pSize = GetSize();
 
 	// 現在の時間を取得
@@ -110,7 +110,7 @@ void CItem::Update(void)
 				CScene::OBJTYPE objType = pScene->GetObjType();
 
 				// プレイヤーの位置を取得
-				D3DXVECTOR3 pos = ((CScene2D*)pScene)->Getposition();
+				D3DXVECTOR3 pos = ((CScene2D*)pScene)->GetPosition();
 
 				// プレイヤーの大きさを取得
 				D3DXVECTOR2 size = ((CScene2D*)pScene)->GetSize();
@@ -128,7 +128,8 @@ void CItem::Update(void)
 		}
 	}
 	if (SCREEN_WIDTH < pPos.x)
-	{// 画面外に出ると消える
+	{
+		// 画面外に出ると消える
 		Uninit();
 	}
 }
@@ -146,7 +147,7 @@ void CItem::Draw(void)
 //=============================================================================
 void CItem::ItemGet(void)
 {
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// プレイヤーの状態を取得
@@ -183,20 +184,23 @@ void CItem::ItemGet(void)
 			pScore->AddScore(10);
 		}
 		else
-		{// 体力回復
+		{
+			// 体力回復
 			pLife->AddLife(1);
 		}
 		break;
 
 	case CTexture::TEXTURETYPE_ITEMMUTEKI:
 		if (state != CPlayer::STATE_RENSYA && state != CPlayer::STATE_DAMAGE)
-		{// 無敵突入
+		{
+			// 無敵突入
 			pPlayer->ChangeState(CPlayer::STATE_MUTEKI);
 		}
 		break;
 	case CTexture::TEXTURETYPE_ITEMGUN:
 		if (state != CPlayer::STATE_MUTEKI && state != CPlayer::STATE_DAMAGE)
-		{// 連射突入
+		{
+			// 連射突入
 			pPlayer->ChangeState(CPlayer::STATE_RENSYA);
 		}
 		break;

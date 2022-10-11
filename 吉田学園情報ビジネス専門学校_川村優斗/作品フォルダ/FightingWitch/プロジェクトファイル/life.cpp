@@ -102,7 +102,8 @@ void CLife::AddLife(int nValue)
 
 	// ハートマークの増減
 	for (int nCntLife = 0; nCntLife < m_nLife; nCntLife++)
-	{// ライフがMAX以上の場合はcreateしないでそっとに戻す
+	{
+		// ライフがMAX以上の場合はcreateしないでそっとに戻す
 		if (nCntLife <= MAX_LIFE)
 		{
 			m_apPolygon[nCntLife] = CUI::Create(D3DXVECTOR3(m_pos.x + m_size.x + 40 * nCntLife, m_pos.y, 0.0f), D3DXVECTOR2(m_size.x, m_size.y), CTexture::TEXTURETYPE_LIFE);

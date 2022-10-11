@@ -73,7 +73,7 @@ void CExplosion::Update(void)
 			m_nPatternAnim++;
 		}
 
-		CScene2D::SetVtxTex(m_nPatternAnim, 0.125f, 0.125f, 1.0f);
+		CScene2D::SetVtxTex(m_nPatternAnim, 0.125f, D3DXVECTOR2(0.125f, 1.0f));
 
 		CScene2D::Update();
 
@@ -102,7 +102,7 @@ CExplosion * CExplosion::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, CTexture::TEX
 	// 爆発のインスタンス生成
 	CExplosion *pExplosion = new CExplosion;
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// 爆発音再生

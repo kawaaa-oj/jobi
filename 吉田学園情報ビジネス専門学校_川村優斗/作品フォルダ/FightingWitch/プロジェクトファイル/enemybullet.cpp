@@ -57,7 +57,7 @@ void CEnemyBullet::Uninit(void)
 void CEnemyBullet::Update(void)
 {
 	// プレイヤーの移動
-	D3DXVECTOR3 pPos = Getposition();
+	D3DXVECTOR3 pPos = GetPosition();
 
 	// 現在の時間を取得
 	CTime *pTime = CGame::GetTime();
@@ -86,12 +86,14 @@ void CEnemyBullet::Update(void)
 	if (nTime != 0)
 	{
 		if (m_nLife == 0)
-		{// 寿命がなくなると爆発し消える
+		{
+			// 寿命がなくなると爆発し消える
 			CExplosion::Create(pPos, D3DXVECTOR2(100.0f, 100.0f), CTexture::TEXTURETYPE_EXPLOSION);
 			Uninit();
 		}
 		else if (-100.0f > pPos.x)
-		{// 画面外に出ると消える
+		{
+			// 画面外に出ると消える
 			Uninit();
 		}
 	}

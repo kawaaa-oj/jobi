@@ -34,9 +34,9 @@ public:
 	void SetColor(D3DXCOLOR col);
 
 private:
-	static LPDIRECT3DTEXTURE9		m_pTexture;	// テクスチャのポインタ
-	LPDIRECT3DVERTEXBUFFER9			m_pVtxBuff; // バッファ
-	D3DXCOLOR						m_col;		// 色
+	static LPDIRECT3DTEXTURE9	m_pTexture;	// テクスチャのポインタ
+	LPDIRECT3DVERTEXBUFFER9		m_pVtxBuff; // バッファ
+	D3DXCOLOR					m_col;		// 色
 
 };
 

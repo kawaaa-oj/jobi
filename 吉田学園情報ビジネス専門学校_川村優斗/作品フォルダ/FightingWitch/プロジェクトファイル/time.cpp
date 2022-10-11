@@ -18,7 +18,7 @@
 #include"texture.h"
 
 //=============================================================================
-//コンストラクタ
+// コンストラクタ
 //=============================================================================
 CTime::CTime(int nPriority) : CScene(nPriority)
 {
@@ -33,14 +33,14 @@ CTime::CTime(int nPriority) : CScene(nPriority)
 }
 
 //=============================================================================
-//デストラクタ
+// デストラクタ
 //=============================================================================
 CTime::~CTime()
 {
 }
 
 //=============================================================================
-//初期化処理
+// 初期化処理
 //=============================================================================
 HRESULT CTime::Init(void)
 {
@@ -52,7 +52,7 @@ HRESULT CTime::Init(void)
 }
 
 //=============================================================================
-//終了処理
+// 終了処理
 //=============================================================================
 void CTime::Uninit(void)
 {
@@ -69,12 +69,14 @@ void CTime::Uninit(void)
 }
 
 //=============================================================================
-//更新処理
+// 更新処理
 //=============================================================================
 void CTime::Update(void)
 {
-	m_dwCurrentTime = timeGetTime();	// 現在の時間を取得
+	// 現在の時間を取得
+	m_dwCurrentTime = timeGetTime();
 
+	// 残り時間を減らす
 	if ((m_dwCurrentTime - m_dwExecLastTime) >= 1000 && m_nTime != 0)
 	{
 		AddTime(-1);
@@ -85,7 +87,8 @@ void CTime::Update(void)
 	m_apNumber[0]->SetNumber(m_nTime % (int)pow(10, 3) / (int)pow(10, 2));
 	m_apNumber[1]->SetNumber(m_nTime % (int)pow(10, 2) / (int)pow(10, 1));
 	m_apNumber[2]->SetNumber(m_nTime % (int)pow(10, 1));
-
+	
+	// 残り時間が少なくなると色が変わる
 	if (m_nTime <= 30)
 	{
 		m_col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
@@ -93,14 +96,21 @@ void CTime::Update(void)
 		m_apNumber[1]->SetColor(m_col);
 		m_apNumber[2]->SetColor(m_col);
 	}
+
+	// 時間切れ
 	if (m_nTime <= 0)
 	{
+		// フェードの取得
 		CFade *pFade = CManager::GetFade();
+		
+		// サウンドの取得
 		CSound *pSound = CManager::GetSound();
 
+		// BGM停止
 		pSound->Stop(pSound->SOUND_LABEL_BGM_GAME);
 		pSound->Stop(pSound->SOUND_LABEL_BGM_MUTEKI);
 
+		// タイムアップ表示
 		if (m_bflag == false)
 		{
 			pSound->Play(pSound->SOUND_LABEL_TIMEUP);
@@ -108,6 +118,8 @@ void CTime::Update(void)
 			m_bflag = true;
 		}
 		m_nInterval++;
+
+		// 少し間をおいてリザルト行き
 		if (m_nInterval == 100)
 		{
 			if (m_fade == false)
@@ -121,7 +133,7 @@ void CTime::Update(void)
 }
 
 //=============================================================================
-//描画処理
+// 描画処理
 //=============================================================================
 void CTime::Draw(void)
 {
@@ -132,14 +144,14 @@ void CTime::Draw(void)
 }
 
 //=============================================================================
-//時間の加算
+// 時間の加算
 //=============================================================================
 void CTime::AddTime(int nValue)
 {
 	m_nTime += nValue;
 }
 //=============================================================================
-//時間の取得
+// 時間の取得
 //=============================================================================
 int CTime::GetTime(void)
 {
@@ -147,12 +159,14 @@ int CTime::GetTime(void)
 }
 
 //=============================================================================
-//時間の生成
+// 時間の生成
 //=============================================================================
 CTime * CTime::Create(D3DXVECTOR3 pos, D3DXVECTOR2 size, int time)
 {
+	// 時間のインスタンス生成
 	CTime *pTime = new CTime;
 
+	// 時間の準備
 	if (pTime != NULL)
 	{
 		pTime->m_nTime = time;

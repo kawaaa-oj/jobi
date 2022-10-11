@@ -35,8 +35,8 @@ public:
 	} TRIGGER_TYPE;
 	// トリガーのタイプ
 
-	CPadX();	//デフォルトコンストラクタ
-	~CPadX();	//デストラクタ
+	CPadX();	//　デフォルトコンストラクタ
+	~CPadX();	//　デストラクタ
 
 	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
 	void Uninit(void);
@@ -64,13 +64,18 @@ public:
 	// 振動関係
 	void SetVibe(int nLeftMotorSpeed, int nRightMotorSpeed, int nSecond);
 
+	// 接続判定
+	bool ConnectPad(void);
+
 private:
-	XINPUT_STATE m_State;			// Xinputの状態
-	XINPUT_STATE m_StateLast;		// 前の状態
-	bool m_bConnect;				// 接続判定
+	XINPUT_STATE	 m_State;		// Xinputの状態
+	XINPUT_STATE	 m_StateLast;	// 前の状態
 	XINPUT_VIBRATION m_Vibration;	// 振動の情報
-	bool m_bVibration;				// 振動判定
-	int m_nVibCount;				// 振動時間
+
+	bool			 m_bConnect;	// 接続判定
+	bool			 m_bVibration;	// 振動判定
+
+	int				 m_nVibCount;	// 振動時間
 };
 
 #endif // !_PADX_H_

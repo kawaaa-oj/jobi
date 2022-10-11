@@ -4,7 +4,6 @@
 // Author : 川村優斗a
 //
 //=============================================================================
-//プリプロセッサ
 #ifndef _RENDERER_H_
 #define _RENDERER_H_
 
@@ -37,9 +36,9 @@ private:
 	LPDIRECT3DDEVICE9		m_pD3DDevice;	// Deviceオブジェクト(描画に必要)
 
 #ifdef _DEBUG
-	LPD3DXFONT				m_nFont = NULL;			// フォントへのポインタ
-	int						m_nCntFPS;				// FPSカウンタ
-	void					DrawFPS(void);			// FPSの表示
+	LPD3DXFONT				m_nFont = NULL;	// フォントへのポインタ
+	int						m_nCntFPS;		// FPSカウンタ
+	void					DrawFPS(void);	// FPSの表示
 #endif
 };
 

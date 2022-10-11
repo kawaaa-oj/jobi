@@ -4,12 +4,12 @@
 // Author : 川村優斗
 //
 //=============================================================================
-//プリプロセッサ
+// プリプロセッサ
 #ifndef _MANAGER_H_
 #define _MANAGER_H_
 
 //*****************************************************************************
-//インクルードファイル
+// インクルードファイル
 //*****************************************************************************
 #include "main.h"
 #include "scene.h"
@@ -22,10 +22,10 @@
 #define POLYGON_SIZE_Y (100.0f)
 
 //*****************************************************************************
-//前方宣言
+// 前方宣言
 //*****************************************************************************
 class CRenderer;
-class CInputKeyboard;
+class CKeyboard;
 class CPadX;
 class CSound;
 class CTitle;
@@ -70,7 +70,7 @@ public:
 	static MODE GetMode(void);
 
 	static CRenderer		*GetRenderer(void);
-	static CInputKeyboard	*GetInputKeyboard(void);
+	static CKeyboard		*GetKeyboard(void);
 	static CPadX			*GetPadX(void);
 	static CSound			*GetSound(void);
 	static CFade			*GetFade(void);
@@ -86,7 +86,7 @@ public:
 private:
 	// 各種ポインタ
 	static CRenderer		*m_pRenderer;
-	static CInputKeyboard	*m_pInputKeyboard;
+	static CKeyboard		*m_pKeyboard;
 	static CPadX			*m_pPadX;
 	static CSound			*m_pSound;
 	static CTitle			*m_pTitle;

@@ -40,7 +40,6 @@ CScore *CGame::m_pScore = NULL;
 CLife *CGame::m_pLife = NULL;
 CEffect *CGame::m_pEffect = NULL;
 CTime *CGame::m_pTime = NULL;
-CRightMenu *CGame::m_pRightmenu = NULL;
 CItem *CGame::m_pItem = NULL;
 CEnemy *CGame::m_pEnemy = NULL;
 CEnemyBullet *CGame::m_pEnemyBullet = NULL;
@@ -50,12 +49,14 @@ CEnemyBullet *CGame::m_pEnemyBullet = NULL;
 //=============================================================================
 CGame::CGame()
 {
-	m_nCnt = 0;
-	m_fPos2 = 0.0f;
+	// メンバ変数の初期化
+	m_nEnemyCnt = 0;
+	m_fPos = 0.0f;
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
-	// 音楽の再生
+
+	// 音楽の再生、音量調整
 	pSound->Play(pSound->SOUND_LABEL_BGM_GAME);
 	pSound->SetVolume(pSound->SOUND_LABEL_BGM_GAME, 0.2f);
 }
@@ -106,9 +107,10 @@ HRESULT CGame::Init(void)
 //=============================================================================
 void CGame::Uninit(void)
 {
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
-	// 音楽の再生
+	
+	// 音楽の停止
 	pSound->Stop(pSound->SOUND_LABEL_BGM_GAME);
 
 	// 数字のテクスチャアンロード
@@ -123,35 +125,37 @@ void CGame::Uninit(void)
 void CGame::Update(void)
 {
 	// キーボード取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
 	// フェードの取得
 	CFade *pFade = CManager::GetFade();
 
-	// 現在の時間を取得
+	// 現在の残り時間を取得
 	CTime *pTime = CGame::GetTime();
 	int nTime = pTime->GetTime();
 
 	if (nTime != 0)
 	{
-		m_nCnt++;
-		if (m_nInterval != 0)
+		m_nEnemyCnt++;
+		if (m_nItemPer != 0)
 		{
-			while (m_nCnt >= m_nInterval)
+			while (m_nEnemyCnt >= m_nItemPer)
 			{
-				float nPos = 0.0f;
-				float nPos3 = 0.0f;
+				float nPos = 0.0f;	// ランダム変数格納用
+				float nPos2 = 0.0f;	// ランダム変数格納用
+
+				// 出現位置が被りすぎなくなるまで無限ループ
 				while (1)
 				{
 					// 敵の出現位置をランダムで決める
 					nPos = rand() % 550;
-					nPos3 = nPos - m_fPos2;
+					nPos2 = nPos - m_fPos;
 
-					if (nPos != m_fPos2)
+					if (nPos != m_fPos)
 					{
-						if (nPos3 > 0)
+						if (nPos2 > 0)
 						{
-							if (nPos3 >= 200)
+							if (nPos2 >= 200)
 							{
 								// どの敵を出すか
 								int type = rand() % 6;
@@ -181,16 +185,16 @@ void CGame::Update(void)
 								{
 									CEnemy::Create(D3DXVECTOR3(850.0f, nPos + 100.0f, 0.0f), D3DXVECTOR3(10.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CEnemy::ENEMY_HOMING, CTexture::TEXTURETYPE_ENEMYBIRD2);
 								}
-								m_fPos2 = nPos;
+								m_fPos = nPos;
 								break;
 							}
 						}
-						// 出現位置がかぶり過ぎないように設定
-						else if (nPos3 < 0)
+						// 出現位置が被りすぎないように設定
+						else if (nPos2 < 0)
 						{
-							if (nPos3 <= -200)
+							if (nPos2 <= -200)
 							{
-								int type = rand() % 5;
+								int type = rand() % 5;	// 敵の種類
 
 								// 敵の生成
 								if (type == CEnemy::ENEMY_NORMAL)
@@ -213,13 +217,13 @@ void CGame::Update(void)
 								{
 									CEnemy::Create(D3DXVECTOR3(850.0f, nPos + 100.0f, 0.0f), D3DXVECTOR3(10.0f, 0.0f, 0.0f), D3DXVECTOR2(50.0f, 50.0f), CEnemy::ENEMY_HOMING, CTexture::TEXTURETYPE_ENEMYBIRD2);
 								}
-								m_fPos2 = nPos;
+								m_fPos = nPos;
 								break;
 							}
 						}
 					}
 				}
-				m_nCnt = 0;
+				m_nEnemyCnt = 0;
 			}
 		}
 	}
@@ -232,14 +236,17 @@ void CGame::Draw(void)
 {
 }
 
+//=============================================================================
+// ファイルの読み込み
+//=============================================================================
 void CGame::LoadFile(void)
 {
-	int nTime, nLife;
 	char aFile[256];
 	FILE *pFile = fopen("data//text//setting.txt", "r");
 
 	if (pFile != NULL)
 	{
+		// END_SCRIPTまで無限に読み込む
 		while (true)
 		{
 			fscanf(pFile, "%s", &aFile[0]);
@@ -259,7 +266,7 @@ void CGame::LoadFile(void)
 			{
 				// アイテムの出現率
 				fscanf(pFile, "%s", &aFile[0]);
-				fscanf(pFile, "%d", &m_nInterval);
+				fscanf(pFile, "%d", &m_nItemPer);
 			}
 			if (strcmp(&aFile[0], "END_SCRIPT") == 0)
 			{
@@ -312,7 +319,7 @@ CPlayer * CGame::GetPlayer(void)
 }
 
 //=============================================================================
-//スコアの取得
+// スコアの取得
 //=============================================================================
 CScore * CGame::GetScore(void)
 {
@@ -320,7 +327,7 @@ CScore * CGame::GetScore(void)
 }
 
 //=============================================================================
-//ライフの取得
+// ライフの取得
 //=============================================================================
 CLife * CGame::GetLife(void)
 {
@@ -328,7 +335,7 @@ CLife * CGame::GetLife(void)
 }
 
 //=============================================================================
-//エフェクトの取得
+// エフェクトの取得
 //=============================================================================
 CEffect * CGame::GetEffect(void)
 {
@@ -336,19 +343,11 @@ CEffect * CGame::GetEffect(void)
 }
 
 //=============================================================================
-//時間の取得
+// 時間の取得
 //=============================================================================
 CTime * CGame::GetTime(void)
 {
 	return m_pTime;
-}
-
-//=============================================================================
-// 右側のステータスの取得
-//=============================================================================
-CRightMenu * CGame::GetRightmenu(void)
-{
-	return m_pRightmenu;
 }
 
 //=============================================================================

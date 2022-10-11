@@ -33,8 +33,8 @@ public:
 	static CItem	*Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size, CTexture::TEXTURE_TYPE type);
 
 private:
-	D3DXVECTOR3					m_move;		// 移動量
-	CTexture::TEXTURE_TYPE		m_ItemType;	// アイテムの種類
+	D3DXVECTOR3				m_move;		// 移動量
+	CTexture::TEXTURE_TYPE	m_ItemType;	// アイテムの種類
 
 };
 

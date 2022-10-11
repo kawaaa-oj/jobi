@@ -35,11 +35,12 @@ public:
 	void Draw(void);
 
 private:
-	D3DXVECTOR3						m_pos;		// 位置
-	D3DXCOLOR						m_col;		// 色
-	float							m_fRad;		// 半径
-	int								m_nLife;	// 寿命
-	float							m_fAlpha;	// アルファ値
+	D3DXVECTOR3	m_pos;		// 位置
+	D3DXCOLOR	m_col;		// 色
+
+	int			m_nLife;	// 寿命
+	float		m_fRad;		// 半径
+	float		m_fAlpha;	// アルファ値
 
 };
 #endif // !_EFFECT_H_

@@ -40,10 +40,13 @@ CTitle::~CTitle()
 //=============================================================================
 HRESULT CTitle::Init(void)
 {
+	// 背景の生成
 	CBg::Create(D3DXVECTOR3(0.0f + SCREEN_CENTER_X, 0.0f + SCREEN_CENTER_Y, 0.0f), D3DXVECTOR2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2), CBg::BGTYPE_OTHER, CTexture::TEXTURETYPE_BGTITLE);
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
+
+	// 音楽の再生、音量調整
 	pSound->Play(pSound->SOUND_LABEL_BGM_TITLE);
 	pSound->SetVolume(pSound->SOUND_LABEL_BGM_TITLE, 0.2f);
 
@@ -60,8 +63,10 @@ HRESULT CTitle::Init(void)
 //=============================================================================
 void CTitle::Uninit(void)
 {
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
+
+	// 音楽の停止
 	pSound->Stop(pSound->SOUND_LABEL_BGM_TITLE);
 
 	Release();

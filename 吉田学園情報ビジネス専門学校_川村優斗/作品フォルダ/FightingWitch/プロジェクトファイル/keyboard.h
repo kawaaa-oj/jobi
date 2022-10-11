@@ -16,19 +16,19 @@
 //*****************************************************************************
 // キーボード処理のクラスの定義
 //*****************************************************************************
-class CInputKeyboard : public CInput
+class CKeyboard : public CInput
 {
 public:
-	CInputKeyboard();
-	~CInputKeyboard();
+	CKeyboard();
+	~CKeyboard();
 
 	HRESULT Init(HINSTANCE hInstance, HWND hWnd);
 	void Uninit(void);
 	void Update(void);
 
-	bool GetPress(int nKey);			// プレス情報
-	bool GetKeyboardTrigger(int nKey);	// トリガー情報
-	bool GetKeyboardRelease(int nKey);	// リリース情報
+	bool GetPress(int nKey);	// プレス情報
+	bool GetTrigger(int nKey);	// トリガー情報
+	bool GetRelease(int nKey);	// リリース情報
 
 private:
 	BYTE m_aKeyStatePress[NUM_KEY_MAX];		// キーボードの入力情報(プレス情報)

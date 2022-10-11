@@ -60,19 +60,19 @@ void CUI::Uninit(void)
 
 void CUI::Update(void)
 {
-	//UIの大きさを設定
-	D3DXVECTOR3 pPos = Getposition();
+	// UIの位置を設定
+	D3DXVECTOR3 pPos = GetPosition();
 
 	// UIのサイズを設定
 	D3DXVECTOR3 pSize = GetSize();
 
-	//キーボードの取得
-	CInputKeyboard *pInputKeyboard = CManager::GetInputKeyboard();
+	// キーボードの取得
+	CKeyboard *pKeyboard = CManager::GetKeyboard();
 
-	//フェードの取得
+	// フェードの取得
 	CFade *pFade = CManager::GetFade();
 
-	// サウンド取得
+	// サウンドの取得
 	CSound *pSound = CManager::GetSound();
 
 	// ゲームパッドの取得
@@ -119,14 +119,14 @@ void CUI::Update(void)
 			m_bDisplay = true;
 		}
 
-		//色設定
+		// 色設定
 		SetColor(m_col);
 
-		//徐々に降りてく
+		// 徐々に降りてく
 		pPos.y += MOVE_PUSH;
 		if (pPos.y >= STOP_PUSH)
 		{
-			//真ん中で止まる
+			// 真ん中で止まる
 			pPos.y -= MOVE_PUSH;
 			if (START_KEY)
 			{
@@ -134,7 +134,7 @@ void CUI::Update(void)
 				{
 					if (m_bDisplay == true)
 					{
-						//ゲーム行き
+						// ゲーム行き
 						pSound->Play(pSound->SOUND_LABEL_OK);
 						pFade->SetFade(CManager::MODE_MENU);
 						m_fade = true;
@@ -145,7 +145,7 @@ void CUI::Update(void)
 		break;
 	// PUSH SPACE
 	case CTexture::TEXTURETYPE_PUSH:
-		//点滅させる
+		// 点滅させる
 		if (m_bBrinkFlag == false)
 		{
 			m_col.a -= 0.01f;
@@ -170,12 +170,12 @@ void CUI::Update(void)
 	case CTexture::TEXTURETYPE_PLAYER:
 		if (m_mode == CManager::MODE_TITLE)
 		{
-			CScene2D::SetVtxTex(0, 0.25f, 0.25f, 1.0f);
+			CScene2D::SetVtxTex(0, 0.25f, D3DXVECTOR2(0.25f, 1.0f));
 
-			//上をウロウロさせとく
+			// 上をウロウロさせとく
 			pPos.x += MOVE_PICT;
 
-			//端まで行ったらワープ
+			// 端まで行ったらワープ
 			if (pPos.x >= 1400.0f)
 			{
 				pPos.x = -70.0f;
@@ -253,9 +253,6 @@ void CUI::Update(void)
 			}
 		}
 		SetColor(m_col);
-		break;
-	case CTexture::TEXTURETYPE_NUMBER:
-
 		break;
 	default:
 		break;

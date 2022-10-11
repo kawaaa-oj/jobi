@@ -1,25 +1,25 @@
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\vc140.pdb
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\vc140.idb
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\keyboard.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\life.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\main.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\manager.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\menu.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\menuui.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\number.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\padx.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\player.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\polygon.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\ranking.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\renderer.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\result.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\result2.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\rightmenu.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\scene.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\scene2d.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\score.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\sound.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\texture.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\time.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\timeup.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\title.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\titleui.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\type.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\ui.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\bg.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\bullet.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\effect.obj
@@ -28,62 +28,14 @@ c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\enemy
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\explosion.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fade.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\game.obj
+c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\gameover.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\help.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\input.obj
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\item.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\keyboard.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\life.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\main.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\manager.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\gameover.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\vc140.pdb
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\vc140.idb
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\menu.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\menuui.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\number.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\padx.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\player.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\polygon.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\ranking.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\renderer.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\result.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\result2.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\rightmenu.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\scene.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\scene2d.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\score.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\sound.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\time.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\timeup.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\title.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\titleui.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\type.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\bg.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\bullet.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\effect.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\enemy.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\enemybullet.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\explosion.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\fade.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\game.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\gameover.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\help.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\input.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\item.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\keyboard.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\life.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\main.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\manager.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\ui.obj
-c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\texture.obj
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\fightingwitch.ilk
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\fightingwitch.exe
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\fightingwitch.pdb
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.ilk
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.exe
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.pdb
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch1.res
-c:\users\student\downloads\fightingwitch-20211207t005752z-001\fightingwitch\debug\fightingwitch1.res
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.tlog\cl.command.1.tlog
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.tlog\cl.read.1.tlog
 c:\users\student\documents\visual studio 2015\projects\fightingwitch\debug\fightingwitch.tlog\cl.write.1.tlog

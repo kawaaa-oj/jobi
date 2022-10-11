@@ -136,7 +136,10 @@ void CScene2D::Update()
 //=============================================================================
 CScene2D * CScene2D::Create(D3DXVECTOR3 pos, D3DXVECTOR3 move, D3DXVECTOR2 size)
 {
+	// 2Dシーンのインスタンス生成
 	CScene2D *pScene2D = new CScene2D;
+
+	// 2Dシーンの準備
 	if (pScene2D != NULL)
 	{
 		pScene2D->Init();
@@ -157,7 +160,7 @@ void CScene2D::SetPosition(D3DXVECTOR3 pos)
 //=============================================================================
 // 座標の取得
 //=============================================================================
-D3DXVECTOR3 CScene2D::Getposition(void)
+D3DXVECTOR3 CScene2D::GetPosition(void)
 {
 	return m_pos;
 }
@@ -193,10 +196,10 @@ void CScene2D::SetColor(D3DXCOLOR col)
 {
 	m_col = col;
 
-	//頂点情報へのポインタ
+	// 頂点情報へのポインタ
 	VERTEX_2D * pVtx;
 
-	//頂点バッファをロックし、頂点データへのポインタを取得
+	// 頂点バッファをロックし、頂点データへのポインタを取得
 	m_pVtxBuff->Lock(0, 0, (void **)&pVtx, 0);
 
 	pVtx[0].col = m_col;
@@ -204,18 +207,17 @@ void CScene2D::SetColor(D3DXCOLOR col)
 	pVtx[2].col = m_col;
 	pVtx[3].col = m_col;
 
-	//頂点バッファをアンロックする
+	// 頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
 }
 
 //=============================================================================
 // テクスチャの設定
 //=============================================================================
-void CScene2D::SetVtxTex(int PtnAnim, float fAnimU, float TexU, float TexV)
+void CScene2D::SetVtxTex(int PtnAnim, float fAnimU, D3DXVECTOR2 Tex)
 {
-
-	m_FTexU = TexU;
-	m_FTexV = TexV;
+	m_FTexU = Tex.x;
+	m_FTexV = Tex.y;
 
 	// 頂点情報へのポインタ
 	VERTEX_2D * pVtx;
@@ -225,9 +227,9 @@ void CScene2D::SetVtxTex(int PtnAnim, float fAnimU, float TexU, float TexV)
 
 	// テクスチャの設定
 	pVtx[0].tex = D3DXVECTOR2(PtnAnim * fAnimU, 0.0f);
-	pVtx[1].tex = D3DXVECTOR2(PtnAnim * fAnimU + TexU, 0.0f);
+	pVtx[1].tex = D3DXVECTOR2(PtnAnim * fAnimU + m_FTexU, 0.0f);
 	pVtx[2].tex = D3DXVECTOR2(PtnAnim * fAnimU, m_FTexV);
-	pVtx[3].tex = D3DXVECTOR2(PtnAnim * fAnimU + TexU, m_FTexV);
+	pVtx[3].tex = D3DXVECTOR2(PtnAnim * fAnimU + m_FTexU, m_FTexV);
 
 	// 頂点バッファをアンロックする
 	m_pVtxBuff->Unlock();
