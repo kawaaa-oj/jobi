@@ -57,7 +57,7 @@ void CFade::Update(void)
 	{
 		if (m_fade == FADE_IN)
 		{
-			m_col.a -= 0.05f;
+			m_col.a -= FADE_SPEED;
 			if (m_col.a <= 0.0f)
 			{
 				m_col.a = 0.0f;
@@ -66,7 +66,7 @@ void CFade::Update(void)
 		}
 		else if (m_fade == FADE_OUT)
 		{
-			m_col.a += 0.05f;
+			m_col.a += FADE_SPEED;
 			if (m_col.a >= 1.0f)
 			{
 				m_col.a = 1.0f;

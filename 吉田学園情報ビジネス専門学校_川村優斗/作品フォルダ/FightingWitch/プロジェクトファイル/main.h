@@ -33,8 +33,9 @@
 //*****************************************************************************
 // ƒ}ƒNƒ’è‹`
 //*****************************************************************************
-#define SCREEN_WIDTH (1280)
-#define SCREEN_HEIGHT (720)
+#define SCREEN_WIDTH (1280)	// ‰æ–Ê‚Ì•
+#define SCREEN_HEIGHT (720)	// ‰æ–Ê‚Ì‚‚³
+#define FPS_COUNT (500)		// FPS‚ðŽZo‚·‚éŠÔŠu
 #define START_KEY (pKeyboard->GetTrigger(DIK_SPACE) == true || pKeyboard->GetTrigger(DIK_RETURN) == true || (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_A)) == true|| (pPadX->GetButtonTrigger(XINPUT_GAMEPAD_START)) == true)
 
 //*****************************************************************************

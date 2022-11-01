@@ -15,13 +15,13 @@
 //*****************************************************************************
 // マクロ定義
 //*****************************************************************************
-#define MAX_UI (8)							// UIの最大数
-#define UITEXT_X (SCREEN_CENTER_X)			// 文字のX座標
-#define UITEXT_WIDTH (300.0f)				// 文字の幅
-#define UITEXT_HEIGHT (50.0f)				// 文字の高さ
-#define UIINFO_Y (630.0f)					// 説明文のX座標
-#define UIINFO_WIDTH (320.0f)				// 説明文の幅
-#define UIINFO_HEIGHT (85.0f)				// 説明文の高さ
+#define MAX_UI (8)					// UIの最大数
+#define UITEXT_X (SCREEN_CENTER_X)	// 文字のX座標
+#define UITEXT_WIDTH (300.0f)		// 文字の幅
+#define UITEXT_HEIGHT (50.0f)		// 文字の高さ
+#define UIINFO_Y (630.0f)			// 説明文のX座標
+#define UIINFO_WIDTH (320.0f)		// 説明文の幅
+#define UIINFO_HEIGHT (85.0f)		// 説明文の高さ
 
 //*****************************************************************************
 // 前方宣言

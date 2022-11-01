@@ -75,20 +75,20 @@ private:
 	// 各音素材のパラメータ
 	PARAM m_aParam[SOUND_LABEL_MAX] =
 	{
-		{ "data//sound//gamebgm.wav", -1 },		// ゲームBGM
-		{ "data//sound//helpbgm.wav", -1 },		// ヘルプBGM
-		{ "data//sound//menubgm.wav", -1 },		// メニューBGM
-		{ "data//sound//resultbgm.wav", -1 },	// リザルトBGM
-		{ "data//sound//mutekibgm.wav", -1 },	// 無敵BGM
-		{ "data//sound//titlebgm.wav", -1 },	// タイトルBGM
-		{ "data//sound//explosion.wav", 0 },	// 爆発音
-		{ "data//sound//shot.wav", 0 },			// ショット音
-		{ "data//sound//damage.wav", 0 },		// ダメージ音
-		{ "data//sound//pagenext.wav", 0 },		// ページめくり
-		{ "data//sound//ok.wav", 0 },			// 決定音
-		{ "data//sound//select.wav", 0 },		// 選択音
-		{ "data//sound//timeup.wav", 0 },		// タイムアップ音
-		{ "data//sound//scoreup.wav", 0 }		// スコアアップ音
+		{ "data//sound//bgm//gamebgm.wav", -1 },		// ゲームBGM
+		{ "data//sound//bgm//helpbgm.wav", -1 },		// ヘルプBGM
+		{ "data//sound//bgm//menubgm.wav", -1 },		// メニューBGM
+		{ "data//sound//bgm//resultbgm.wav", -1 },	// リザルトBGM
+		{ "data//sound//bgm//mutekibgm.wav", -1 },	// 無敵BGM
+		{ "data//sound//bgm//titlebgm.wav", -1 },	// タイトルBGM
+		{ "data//sound//se//explosion.wav", 0 },	// 爆発音
+		{ "data//sound//se//shot.wav", 0 },			// ショット音
+		{ "data//sound//se//damage.wav", 0 },		// ダメージ音
+		{ "data//sound//se//pagenext.wav", 0 },		// ページめくり
+		{ "data//sound//se//ok.wav", 0 },			// 決定音
+		{ "data//sound//se//select.wav", 0 },		// 選択音
+		{ "data//sound//se//timeup.wav", 0 },		// タイムアップ音
+		{ "data//sound//se//scoreup.wav", 0 }		// スコアアップ音
 	};
 
 };
