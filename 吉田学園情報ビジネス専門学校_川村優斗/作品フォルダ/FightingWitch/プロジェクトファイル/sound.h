@@ -75,9 +75,9 @@ private:
 	// 各音素材のパラメータ
 	PARAM m_aParam[SOUND_LABEL_MAX] =
 	{
-		{ "data//sound//bgm//gamebgm.wav", -1 },		// ゲームBGM
-		{ "data//sound//bgm//helpbgm.wav", -1 },		// ヘルプBGM
-		{ "data//sound//bgm//menubgm.wav", -1 },		// メニューBGM
+		{ "data//sound//bgm//gamebgm.wav", -1 },	// ゲームBGM
+		{ "data//sound//bgm//helpbgm.wav", -1 },	// ヘルプBGM
+		{ "data//sound//bgm//menubgm.wav", -1 },	// メニューBGM
 		{ "data//sound//bgm//resultbgm.wav", -1 },	// リザルトBGM
 		{ "data//sound//bgm//mutekibgm.wav", -1 },	// 無敵BGM
 		{ "data//sound//bgm//titlebgm.wav", -1 },	// タイトルBGM
